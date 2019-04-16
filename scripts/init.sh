@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-./server-setup.sh
+/opt/teleport/server-setup.sh
 
-./openvpn-service.sh
+/opt/teleport/openvpn-service.sh
 
-./allow-ip-forwarding.sh
+#./allow-ip-forwarding.sh
 
-./setup-ufw.sh
+#./setup-ufw.sh
