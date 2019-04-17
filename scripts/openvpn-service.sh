@@ -8,3 +8,4 @@ gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz | t
 
 #Edit server.conf Probably should be copied
 #Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
+cp /opt/teleport/config/server.conf /etc/openvpn/server.conf

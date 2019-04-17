@@ -4,6 +4,6 @@
 
 /opt/teleport/openvpn-service.sh
 
-#./allow-ip-forwarding.sh
+/opt/teleport/allow-ip-forwarding.sh
 
 #./setup-ufw.sh
