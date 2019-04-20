@@ -16,12 +16,10 @@ sudo nano /etc/ufw/before.rules
 COMMIT
 # END OPENVPN RULES
 
-sudo nano /etc/default/ufw
+cp /opt/teleport/config/ufw /etc/default/ufw
 
-#EDIT: DEFAULT_FORWARD_POLICY="ACCEPT"
+ufw allow 1194/udp
+# ufw allow OpenSSH
 
-sudo ufw allow 1194/udp
-sudo ufw allow OpenSSH
-
-sudo ufw disable
-sudo ufw enable
+ufw disable
+ufw enable

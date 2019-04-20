@@ -8,7 +8,7 @@ Out of the box openvpn server docker image which you can use anywhere
 `docker build -t alekslitvinenk/openvpn:v0.0.1 .`
 
 ## To run docker-openvpn
-`docker run -it --rm --name uvpn alekslitvinenk/openvpn:v0.0.1`
+`docker run -it --rm --name uvpn alekslitvinenk/openvpn:snapshot`
 
 ### Important notes:
 In order to get openvpn machinery work in docker for mac you will need to assemple your own linux kernel build and substitute with it the build shipped wich docker for mac. There's a good account on how to do so:

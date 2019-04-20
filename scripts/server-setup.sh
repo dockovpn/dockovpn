@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 apt-get update
-echo 'Y' | apt-get install openvpn easy-rsa
+echo 'Y' | apt-get install openvpn easy-rsa ufw
 make-cadir ~/openvpn-ca
 cd ~/openvpn-ca
 
