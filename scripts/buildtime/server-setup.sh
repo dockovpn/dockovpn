@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 apt-get update
-echo 'Y' | apt-get install openvpn easy-rsa ufw
+#echo 'Y' | apt-get install openvpn easy-rsa
+apt-get install openvpn easy-rsa iptables-persistent <<EOF
+Y
+no
+no
+EOF
 make-cadir ~/openvpn-ca
 cd ~/openvpn-ca
 
