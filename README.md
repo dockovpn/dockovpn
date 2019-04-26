@@ -8,6 +8,7 @@ Out of the box openvpn server docker image which you can use anywhere
 `./build.sh`
 
 ## To run docker-openvpn
+`--privileged` flag is required to do manipulations with `iptables`
 `docker run --privileged -it --rm --name uvpn alekslitvinenk/openvpn:snapshot`
 
 ## To build customized linuxkit image
