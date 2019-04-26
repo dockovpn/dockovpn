@@ -4,6 +4,6 @@
 # nano /etc/sysctl.conf
 # net.ipv4.ip_forward=1
 
-cp /opt/teleport/config/sysctl.conf /etc/openvpn/sysctl.conf
+cp $APP_INSTALL_PATH/config/sysctl.conf /etc/openvpn/sysctl.conf
 
 sysctl -p

@@ -1,8 +1,13 @@
 FROM ubuntu:16.04
 
-COPY scripts /opt/teleport
-COPY config /opt/teleport/config
+LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
-RUN /opt/teleport/buildtime/init.sh
+ENV APP_NAME teleport
+ENV APP_INSTALL_PATH /opt/${APP_NAME}
 
-ENTRYPOINT [ "/opt/teleport/runtime/start.sh" ]
+COPY scripts ${APP_INSTALL_PATH}
+COPY config ${APP_INSTALL_PATH}/config
+
+RUN ${APP_INSTALL_PATH}/buildtime/init.sh
+
+ENTRYPOINT ["bin/sh", "-c", "$APP_INSTALL_PATH/runtime/start.sh" ]
