@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 #Copy server keys and certificates
 cd ~/openvpn-ca/keys

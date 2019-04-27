@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 CUR_DIR=$APP_INSTALL_PATH/buildtime
 

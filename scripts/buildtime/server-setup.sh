@@ -1,11 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-apt-get update
-
-apt-get install -y apt-utils openvpn easy-rsa iptables-persistent dbus <<EOF
-no
-no
-EOF
+apk add --no-cache openvpn easy-rsa bash
 make-cadir ~/openvpn-ca
 cd ~/openvpn-ca
 

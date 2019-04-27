@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM alpine
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
@@ -10,4 +10,4 @@ COPY config ${APP_INSTALL_PATH}/config
 
 RUN ${APP_INSTALL_PATH}/buildtime/init.sh
 
-ENTRYPOINT ["bin/sh", "-c", "$APP_INSTALL_PATH/runtime/start.sh" ]
+#ENTRYPOINT ["bin/sh", "-c", "$APP_INSTALL_PATH/runtime/start.sh" ]

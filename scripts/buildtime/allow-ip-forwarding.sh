@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # This probably should be done via sed tool
 # nano /etc/sysctl.conf
