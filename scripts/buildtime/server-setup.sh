@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 apt-get update
-#echo 'Y' | apt-get install openvpn easy-rsa
-apt-get install -y openvpn easy-rsa iptables-persistent <<EOF
+
+apt-get install -y apt-utils openvpn easy-rsa iptables-persistent dbus <<EOF
 no
 no
 EOF

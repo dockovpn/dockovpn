@@ -2,7 +2,10 @@
 Out of the box openvpn server docker image which you can use anywhere
 
 ## To run bare Ubuntu in docker
-`docker run -it --rm --name ubuntu-openvpn --mount type=bind,source="$(pwd)"/scripts,target=/opt/teleport  ubuntu:16.04`
+`docker run -it --rm --name ubuntu-openvpn -v $(pwd)/scripts:/opt/teleport  ubuntu:16.04`
+
+## To run bare Alpine in docker
+`docker run -it --rm --name ubuntu-openvpn -v $(pwd):/opt/teleport  alpine`
 
 ## To build docker-openvpn image
 `./build.sh`
