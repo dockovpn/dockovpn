@@ -6,4 +6,4 @@
 
 cp $APP_INSTALL_PATH/config/sysctl.conf /etc/sysctl.conf
 
-#sysctl -p /etc/sysctl.conf
+sysctl -p /etc/sysctl.conf
