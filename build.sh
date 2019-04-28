@@ -5,4 +5,4 @@
 
 NEW_UUID=snapshot
 
-docker build -t alekslitvinenk/openvpn:$NEW_UUID -t alekslitvinenk/openvpn:latest .
+docker build -t alekslitvinenk/openvpn:$NEW_UUID -t alekslitvinenk/openvpn:latest --no-cache .

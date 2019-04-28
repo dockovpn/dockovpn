@@ -10,4 +10,4 @@ COPY config ${APP_INSTALL_PATH}/config
 
 RUN ${APP_INSTALL_PATH}/buildtime/init.sh
 
-#ENTRYPOINT ["bin/sh", "-c", "$APP_INSTALL_PATH/runtime/start.sh" ]
+ENTRYPOINT ["bin/sh", "-c", "$APP_INSTALL_PATH/runtime/start.sh" ]

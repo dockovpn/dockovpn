@@ -1,0 +1,1 @@
+apk add --no-cache openvpn easy-rsa bash
