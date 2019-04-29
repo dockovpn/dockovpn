@@ -1,34 +1,32 @@
 #!/bin/sh
 
-apk add --no-cache openvpn easy-rsa bash
-make-cadir ~/openvpn-ca
-cd ~/openvpn-ca
+cd /usr/share/easy-rsa
 
-# Need to edit vars somehow or copy entire file from somewhere
-source vars
-./clean-all
-printf '\n\n\n\n\n\n\n\n' | ./build-ca
+./easyrsa init-pki
+./easyrsa build-ca << EOF
+12345
+12345
 
-# There must be better way to do so
-./build-key-server server << EOF
-
-
-
-
-
-
-
-
-
-
-y
-y
 EOF
-#need not to create challenging password
-#need to answer y(yes) when asked to sign and commit certificate
+# CA creation complete and you may now import and sign cert requests.
+# Your new CA certificate file for publishing is at:
+# /usr/share/easy-rsa/pki/ca.crt
 
-#Build strong Deffi-Haufman key
-./build-dh
+./easyrsa gen-req MyReq << EOF2
+12345
+12345
 
-# Generate an HMAC signature to strengthen the server's TLS integrity verification capabilities
-openvpn --genkey --secret keys/ta.key
+EOF2
+# Keypair and certificate request completed. Your files are:
+# req: /usr/share/easy-rsa/pki/reqs/MyReq.req
+# key: /usr/share/easy-rsa/pki/private/MyReq.key
+
+./easyrsa sign-req client MyReq << EOF3
+yes
+12345
+EOF3
+# Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
+
+./easyrsa gen-dh
+
+# DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem

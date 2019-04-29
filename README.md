@@ -11,8 +11,9 @@ Out of the box openvpn server docker image which you can use anywhere
 `./build.sh`
 
 ## To run docker-openvpn
-`--privileged` flag is required to do manipulations with `iptables`
-`docker run --privileged -it --rm --name uvpn alekslitvinenk/openvpn:snapshot`
+`--privileged` flag is required to do manipulations with `iptables`.
+Mount is required to export client credentials.
+`docker run --privileged -it --rm --name uvpn -v $(pwd)/client:/opt/teleport/client alekslitvinenk/openvpn:snapshot`
 
 ## To build customized linuxkit image
 `linuxkit build -format iso-efi -disable-content-trust docker-for-mac.yml`
