@@ -10,4 +10,7 @@ COPY config ${APP_INSTALL_PATH}/config
 
 RUN ${APP_INSTALL_PATH}/buildtime/init.sh
 
+EXPOSE 1194
+EXPOSE 8080
+
 ENTRYPOINT ["bin/sh", "-c", "$APP_INSTALL_PATH/runtime/start.sh" ]
