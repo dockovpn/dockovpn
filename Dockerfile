@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.9.3
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 

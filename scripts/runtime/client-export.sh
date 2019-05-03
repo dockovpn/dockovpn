@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd /usr/share/easy-rsa/pki
 cp private/client.key issued/client.crt ca.crt $APP_INSTALL_PATH/client

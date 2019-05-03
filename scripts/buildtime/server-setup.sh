@@ -3,18 +3,14 @@
 cd /usr/share/easy-rsa
 
 ./easyrsa init-pki
-./easyrsa build-ca << EOF
-12345
-12345
+./easyrsa build-ca nopass << EOF
 
 EOF
 # CA creation complete and you may now import and sign cert requests.
 # Your new CA certificate file for publishing is at:
 # /usr/share/easy-rsa/pki/ca.crt
 
-./easyrsa gen-req MyReq << EOF2
-12345
-12345
+./easyrsa gen-req MyReq nopass << EOF2
 
 EOF2
 # Keypair and certificate request completed. Your files are:
@@ -23,7 +19,6 @@ EOF2
 
 ./easyrsa sign-req client MyReq << EOF3
 yes
-12345
 EOF3
 # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
 
