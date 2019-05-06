@@ -1,6 +1,10 @@
 #!/bin/bash
 
 cd /usr/share/easy-rsa/pki
+
+# Create mkdir if doesn't exist
+mkdir -p $APP_INSTALL_PATH/client
+
 cp private/client.key issued/client.crt ca.crt $APP_INSTALL_PATH/client
 cd $APP_INSTALL_PATH
 cp config/client.ovpn client
