@@ -17,7 +17,7 @@ EOF2
 # req: /usr/share/easy-rsa/pki/reqs/MyReq.req
 # key: /usr/share/easy-rsa/pki/private/MyReq.key
 
-./easyrsa sign-req client MyReq << EOF3
+./easyrsa sign-req server MyReq << EOF3
 yes
 EOF3
 # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
