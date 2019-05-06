@@ -3,6 +3,7 @@
 cd /usr/share/easy-rsa/pki
 cp private/client.key issued/client.crt ca.crt $APP_INSTALL_PATH/client
 cd $APP_INSTALL_PATH
+cp config/client.ovpn client
 zip -r client.zip client
 cp client.zip client
 
