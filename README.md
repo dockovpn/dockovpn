@@ -9,8 +9,9 @@ Out of the box openvpn server docker image which you can use anywhere
 `./build.sh`
 
 ## To run docker-openvpn
-`--privileged` flag is required to do manipulations with `iptables`.<br>
-`./run.sh`
+`docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp alekslitvinenk/openvpn`<br>
+
+**Note:** `--privileged` flag is required to do manipulations with `iptables`
 
 ## How to use
-After docker container started it runs one-shot web-server at <public_ip>:8080. By going to this link you will be offered to download a zip archive containing client infrastrucure (certificate, key, ..etc). You can use this files ti setup client `.conf` file and use it to connect to your OpenVPN server
+After docker container started it runs one-shot web-server at <public_ip>:8080. By going to this link you will be offered to download a zip archive containing client infrastrucure: certificate, key, ca and client configuration file (client.ovpn). In this fule change `localhost` server address to your actual server location. Import this configuration file to your favorite openvpn client and use it.
