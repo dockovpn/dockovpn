@@ -3,21 +3,20 @@ Out of the box stateless openvpn server docker image which starts in less than 2
 
 ![IMG](https://alekslitvinenk.github.io/docker-openvpn/assets/img/beta.png)
 
-### GitHub repo:
+## GitHub repo:
 https://github.com/alekslitvinenk/docker-openvpn
 
-### DockerHub repo:
+## DockerHub repo:
 https://hub.docker.com/r/alekslitvinenk/openvpn
 
-⚠️**WARNING:** This project is still a WIP project (WORK IN PROGRESS). We are constantly improving code quality and strive to provide best experience, nonetheless there are many things that have to be improved in order to make this project production ready. Please use this project at your own risk! Right now the major security concern is that all client and server keys as well as certificates are generated at build time and hence can be easily tempered. We will [FIX](https://github.com/alekslitvinenk/docker-openvpn/issues/2) it in future updates.
+⚠️ **WARNING:** This project is still a WIP project (WORK IN PROGRESS). We are constantly improving code quality and strive to provide best experience, nonetheless there are many things that have to be improved in order to make this project production ready. Please use this project at your own risk!
 
-## To build docker-openvpn image
-`./build.sh`
+# Quick Start
 
-## To run docker-openvpn
+## 1. Run docker-openvpn
 `docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp alekslitvinenk/openvpn`<br>
 
-**Note:** `--privileged` flag is required to do manipulations with `iptables`
+ℹ️ **Note:** `--privileged` flag is required to do manipulations with `iptables` and to setup flag that allows trafic forwarding in `sysctl.conf`.
 
-## How to use
-After docker container started it runs one-shot web-server at <public_ip>:8080. By going to this link you will be offered to download a zip archive containing client infrastrucure: certificate, key, ca and client configuration file (client.ovpn). In this fule change `localhost` server address to your actual server location. Import this configuration file to your favorite openvpn client and use it.
+## 2. Connect to your docker-openvpn container
+After docker-openvpn container has started it runs one-shot web-server at <br> `<your_host>:8080`.<br> By going to this link you will be offered to download a zip archive containing client infrastrucure: certificate, key, ca and client configuration file (client.ovpn). In this file change `localhost` server address to your actual server location. Import this configuration file to your favorite openvpn client and use it.
