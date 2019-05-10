@@ -1,7 +1,7 @@
 # docker-openvpn
-Out of the box openvpn server docker image which you can use anywhere
+🔐 Out of the box stateless openvpn server docker image which starts in less than 2 seconds and doesn't require presistent storage.
 
-![IMG](docs/img/beta.png)
+![IMG](https://alekslitvinenk.github.io/docker-openvpn/assets/img/beta.png)
 
 **WARNING:** This project is still a WIP project (WORK IN PROGRESS). We are constantly improving code quality and strive to provide best experience, nonetheless there are many things that have to be improved in order to make this project production ready. Please use this project at your own risk! Right now the major security concern is that all client and server keys as well as certificates are generated at build time and hence can be easily tempered. We will [FIX](https://github.com/alekslitvinenk/docker-openvpn/issues/2) it in future updates.
 
