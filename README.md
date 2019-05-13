@@ -32,7 +32,7 @@ Data Base Updated
   adding: client/client.ovpn (deflated 23%)
   adding: client/client.crt (deflated 45%)
  ```
-## 2. Getting client configuration
+## 2. Get client configuration
 Now, as your docker-openvpn is up and running you can go to `<your_host_public_ip>:8080` on your desktop or laptop and download zip archive with client files. Unzip archive. Import `client.ovpn` into your favourite openvpn client. In most cases it should be enough to just doubleclick on that file.
 
 ## 3. Connect to your docker-openvpn container
