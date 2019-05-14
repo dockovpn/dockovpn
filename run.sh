@@ -2,4 +2,4 @@
 
 rm -r client
 
-docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp alekslitvinenk/openvpn
+docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp -e HOST_ADDR=localhost alekslitvinenk/openvpn

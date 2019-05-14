@@ -13,8 +13,17 @@ cd /usr/share/easy-rsa/pki
 mkdir -p $APP_INSTALL_PATH/client
 
 cp private/client.key issued/client.crt ca.crt $APP_INSTALL_PATH/client
+
+# Set default value to HOST_ADDR if it was not set from environment
+if [ -z "$HOST_ADDR"]
+then
+    HOST_ADDR='localhost'
+fi
+
 cd $APP_INSTALL_PATH
 cp config/client.ovpn client
+echo -e "\nremote $HOST_ADDR 1194" >> client/client.ovpn
+
 zip -r client.zip client
 cp client.zip client
 
