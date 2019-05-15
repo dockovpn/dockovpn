@@ -15,16 +15,24 @@ mkdir -p $APP_INSTALL_PATH/client
 cp private/client.key issued/client.crt ca.crt $APP_INSTALL_PATH/client
 
 # Set default value to HOST_ADDR if it was not set from environment
-if [ -z "$HOST_ADDR"]
+if [ -z "$HOST_ADDR" ]
 then
     HOST_ADDR='localhost'
 fi
 
 cd $APP_INSTALL_PATH
 cp config/client.ovpn client
+
 echo -e "\nremote $HOST_ADDR 1194" >> client/client.ovpn
 
-zip -r client.zip client
+# Embed client authentication files into config file
+cat <(echo -e '<ca>') \
+    client/ca.crt <(echo -e '</ca>\n<cert>') \
+    client/client.crt <(echo -e '</cert>\n<key>') \
+    client/client.key <(echo -e '</key>') \
+    >> client/client.ovpn
+
+zip -r client.zip client/client.ovpn
 cp client.zip client
 
 FILE_NAME=client.zip
