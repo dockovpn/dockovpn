@@ -13,4 +13,5 @@ RUN ${APP_INSTALL_PATH}/buildtime/init.sh
 EXPOSE 1194/udp
 EXPOSE 8080/tcp
 
-ENTRYPOINT ["bin/sh", "-c", "$APP_INSTALL_PATH/runtime/start.sh" ]
+# Add simlink to this file to /bin/start.sh
+ENTRYPOINT [ "/opt/teleport/runtime/start.sh" ]
