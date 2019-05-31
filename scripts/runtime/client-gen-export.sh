@@ -40,7 +40,12 @@ function createConfig() {
 }
 
 function zipFiles() {
-    zip -r client.zip client/client.ovpn
+    zip client.zip client/client.ovpn
+    cp client.zip client
+}
+
+function zipFilesWithPassword() {
+    zip -P "$1" client.zip client/client.ovpn
     cp client.zip client
 }
 
@@ -52,9 +57,6 @@ FLAGS=$1
 
 # Switch statement
 case $FLAGS in
-    n)
-        echo "Default param"
-        ;;
     c)      
         createConfig
 
@@ -69,6 +71,20 @@ case $FLAGS in
         CONTENT_TYPE=application/zip
         FILE_NAME=client.zip
         FILE_PATH=$FILE_NAME
+        ;;
+    czp)
+        # (()) engaes arthimetic context
+        if (($# < 2))
+        then
+            echo "Not enogh arguments" && exit 0
+        else
+            createConfig
+            zipFilesWithPassword "$2"
+
+            CONTENT_TYPE=application/zip
+            FILE_NAME=client.zip
+            FILE_PATH=$FILE_NAME
+        fi
         ;;
 esac
 
