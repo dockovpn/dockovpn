@@ -20,9 +20,9 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 
 ## 1. Run docker-openvpn
 If you know which ip address was assigned to your server, pass it in environment variable:<br>
-`docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp -e HOST_ADDR=<your_host_public_ip> alekslitvinenk/openvpn`.<br>
+`docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp -e HOST_ADDR=<your_host_public_ip> alekslitvinenk/openvpn cz`.<br>
 If you don't know you server's ip adress, use the code below to launch you docker-openvpn:<br>
-`docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp -e HOST_ADDR=$(curl -s https://api.ipify.org) alekslitvinenk/openvpn`
+`docker run --privileged -it --rm --name dovpn -p 1194:1194/udp -p 8080:8080/tcp -e HOST_ADDR=$(curl -s https://api.ipify.org) alekslitvinenk/openvpn cz`
 
 ℹ️ **Note:** `--privileged` flag is required to do manipulations with `iptables` and to setup flag that allows trafic forwarding in `sysctl.conf`.<br>
 We will try to get rid of this flag in the future releases of docker-openvpn.<br><br>
@@ -30,11 +30,7 @@ If everything went well, you should be able to see the following output in your 
 ```
 Write out database with 1 new entries
 Data Base Updated
-  adding: client/ (stored 0%)
-  adding: client/client.key (deflated 23%)
-  adding: client/ca.crt (deflated 25%)
-  adding: client/client.ovpn (deflated 23%)
-  adding: client/client.crt (deflated 45%)
+  adding: client/client.ovpn (deflated 42%)
  ```
 ## 2. Get client configuration
 Now, as your docker-openvpn is up and running you can go to `<your_host_public_ip>:8080` on your desktop or laptop and download zip archive with client files. Unzip archive. Import `client.ovpn` into your favourite openvpn client. In most cases it should be enough to just doubleclick on that file.
