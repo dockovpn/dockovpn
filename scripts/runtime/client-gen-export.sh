@@ -3,12 +3,17 @@
 # Exit normally if the count of arguments is 0 i.e we don't have to create a user
 ((!$#)) && echo "Nothing to generate for client!" && exit 0
 
-echo -e "\n<<PARAMS: $@>>"
+function datef() {
+    # Output:
+    # Sat Jun  8 20:29:08 2019
+    date "+%a %b  %-d %T %Y"
+}
 
 function createConfig() {
     cd /usr/share/easy-rsa
 
-    ./easyrsa build-client-full client nopass
+    # Redirect stderr to the black hole
+    ./easyrsa build-client-full client nopass &> /dev/null
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
     # Client sertificate /usr/share/easy-rsa/pki/issued/client.crt
     # CA is by the path /usr/share/easy-rsa/pki/ca.crt
@@ -37,16 +42,24 @@ function createConfig() {
         client/client.crt <(echo -e '</cert>\n<key>') \
         client/client.key <(echo -e '</key>') \
         >> client/client.ovpn
+
+    echo "$(datef) Client config has been generated"
 }
 
 function zipFiles() {
-    zip client.zip client/client.ovpn
+    # -q to silence zip output
+    zip -q client.zip client/client.ovpn
     cp client.zip client
+
+    echo "$(datef) Client.zip created"
 }
 
 function zipFilesWithPassword() {
-    zip -P "$1" client.zip client/client.ovpn
+    # -q to silence zip output
+    zip -q -P "$1" client.zip client/client.ovpn
     cp client.zip client
+
+    echo "$(datef) Client.zip with password protection created"
 }
 
 # Parse string into chars:
@@ -88,4 +101,8 @@ case $FLAGS in
         ;;
 esac
 
+echo "$(datef) Config server started at $HOST_ADDR:8080/"
+
 { echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(wc -c <$FILE_PATH)\r\nContent-Type: $CONTENT_TYPE\r\nContent-Disposition: attachment; fileName=\"$FILE_NAME\"\r\nAccept-Ranges: bytes\r\n\r\n"; cat $FILE_PATH; } | nc -w0 -l 8080
+
+echo "$(datef) Config server shut down"
