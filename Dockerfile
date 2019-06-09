@@ -14,3 +14,4 @@ EXPOSE 1194/udp
 EXPOSE 8080/tcp
 
 ENTRYPOINT [ "start.sh" ]
+CMD [ "c" ]

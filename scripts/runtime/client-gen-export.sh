@@ -43,7 +43,7 @@ function createConfig() {
         client/client.key <(echo -e '</key>') \
         >> client/client.ovpn
 
-    echo "$(datef) Client config has been generated"
+    echo "$(datef) Client.ovpn file has been generated"
 }
 
 function zipFiles() {
@@ -51,7 +51,7 @@ function zipFiles() {
     zip -q client.zip client/client.ovpn
     cp client.zip client
 
-    echo "$(datef) Client.zip created"
+    echo "$(datef) Client.zip file has been generated"
 }
 
 function zipFilesWithPassword() {
@@ -59,7 +59,7 @@ function zipFilesWithPassword() {
     zip -q -P "$1" client.zip client/client.ovpn
     cp client.zip client
 
-    echo "$(datef) Client.zip with password protection created"
+    echo "$(datef) Client.zip with password protection has been generated"
 }
 
 # Parse string into chars:
@@ -101,8 +101,9 @@ case $FLAGS in
         ;;
 esac
 
-echo "$(datef) Config server started at $HOST_ADDR:8080/"
+echo "$(datef) Config server started, download your $FILE_NAME config at http://$HOST_ADDR:8080/"
+echo "$(datef) NOTE: After you download you client config, http server will be shut down!"
 
 { echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(wc -c <$FILE_PATH)\r\nContent-Type: $CONTENT_TYPE\r\nContent-Disposition: attachment; fileName=\"$FILE_NAME\"\r\nAccept-Ranges: bytes\r\n\r\n"; cat $FILE_PATH; } | nc -w0 -l 8080
 
-echo "$(datef) Config server shut down"
+echo "$(datef) Config http server has been shut down"
