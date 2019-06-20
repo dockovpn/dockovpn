@@ -50,3 +50,8 @@ Import `client.ovpn` into your favourite openvpn client. In most cases it should
 You should be able to see your newly added client configuration in the list of available configurations. Click on it, connection process should initiate and be established withing few seconds.
 
 Congratulations, now you're all set and can safely browse the internet.
+
+# Other resources
+[Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>
+[Code Of Conduct](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CODE_OF_CONDUCT.md)<br>
+[License Agreement](https://github.com/alekslitvinenk/docker-openvpn/blob/master/LICENSE)
