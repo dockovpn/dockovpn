@@ -6,7 +6,7 @@ to the world free of censorship and were people can discuss any problem of their
 connection is a key component of such communication. Any help is welcome: be that coding, be that documentation improvement
 or bug reporting.<br>
 There are different guidelines for every kind of contribution, but they all have in common the idea of being respectful
-and polite to each other. Please make sure to check or [Code of Conduct](CODE_OF_CONDUCT.md).
+and polite to each other. Please make sure to check or [Code of Conduct](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CODE_OF_CONDUCT.md).
 
 ## Code contributing
 If you want to contribute by improving our code-base, you can do so by picking an existing issue and opening a pull-request
