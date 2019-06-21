@@ -1,15 +1,13 @@
 <p align=center><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/logo-s.png"></p><br>
 
 # 🔐Docker-OpenVPN
-Out of the box stateless openvpn server docker image which starts in less than 2 seconds and doesn't require presistent storage.
+Out of the box stateless openvpn server docker image which starts in a few seconds and doesn't require presistent storage.
 
 ## GitHub repo:
 https://github.com/alekslitvinenk/docker-openvpn
 
 ## DockerHub repo:
 https://hub.docker.com/r/alekslitvinenk/openvpn
-
-⚠️ **WARNING:** This project is still a WIP project (WORK IN PROGRESS). We are constantly improving code quality and strive to provide best experience, nonetheless there are many things that have to be improved in order to make this project production ready. Please use this project at your own risk!
 
 # Quick Start 🚀
 

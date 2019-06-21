@@ -2,7 +2,6 @@
 
 cd /usr/share/easy-rsa
 
-./easyrsa init-pki
 ./easyrsa build-ca nopass << EOF
 
 EOF
@@ -22,6 +21,6 @@ yes
 EOF3
 # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
 
-./easyrsa gen-dh
-
-# DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+#Copy server keys and certificates
+cd /usr/share/easy-rsa/pki
+cp ca.crt issued/MyReq.crt private/MyReq.key /etc/openvpn
