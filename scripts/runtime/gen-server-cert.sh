@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 cd /usr/share/easy-rsa
 
 ./easyrsa build-ca nopass << EOF
