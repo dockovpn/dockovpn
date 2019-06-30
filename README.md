@@ -10,7 +10,7 @@ https://github.com/alekslitvinenk/docker-openvpn
 https://hub.docker.com/r/alekslitvinenk/openvpn
 
 # Video Guide 📹
-<p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-small.png"></a></p><br>
+<p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
 
 # Quick Start 🚀
 
