@@ -1,7 +1,7 @@
 <p align=center><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/logo-s.png"></p><br>
 
 # 🔐Docker-OpenVPN
-Out of the box stateless openvpn server docker image which starts in a few seconds and doesn't require presistent storage.
+Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage.
 
 ## GitHub repo:
 https://github.com/alekslitvinenk/docker-openvpn
@@ -53,7 +53,7 @@ You should be able to see your newly added client configuration in the list of a
 Congratulations, now you're all set and can safely browse the internet.
 
 # Known issues
-1. Conrrently docker-openvpn works only if default network iterface is called eth0. [Issue#15](https://github.com/alekslitvinenk/docker-openvpn/issues/15)
+1. Currently docker-openvpn works only if the default network iterface on the host machine is called `eth0`. [Issue#15](https://github.com/alekslitvinenk/docker-openvpn/issues/15)
 
 # Other resources
 [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>
