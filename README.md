@@ -1,5 +1,9 @@
 <p align=center><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/logo-s.png"></p><br>
 
+![Build Status](http://dockovpn.io:3000/build/docker-openvpn)
+![Build Time](http://dockovpn.io:3000/built/docker-openvpn)
+[![Docker Pulls](https://img.shields.io/docker/pulls/alekslitvinenk/openvpn.svg)](https://hub.docker.com/r/alekslitvinenk/openvpn/)
+
 # 🔐Docker-OpenVPN
 Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage.
 
