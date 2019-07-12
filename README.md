@@ -25,13 +25,12 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 3. Public ip address assigned to your server.
 
 ## 1. Run docker-openvpn
-If you know which ip address was assigned to your server, pass it in environment variable:<br>
-```
-docker run --privileged -it --rm --name dockovpn -p 1194:1194/udp -p 8080:8080/tcp -e HOST_ADDR=<your_host_public_ip> alekslitvinenk/openvpn
-```
-If you don't know you server's ip adress, use the code below to launch you docker-openvpn:<br>
-```
-docker run --privileged -it --rm --name dockovpn -p 1194:1194/udp -p 8080:8080/tcp -e HOST_ADDR=$(curl -s https://api.ipify.org) alekslitvinenk/openvpn
+Copy & paste the following command to run docker-openvpn:<br>
+```bash
+docker run --cap-add=NET_ADMIN \
+-it -p 1194:1194/udp -p 8080:8080/tcp \
+-e HOST_ADDR=$(curl -s https://api.ipify.org) \
+alekslitvinenk/openvpn
 ```
 
 If everything went well, you should be able to see the following output in your console:
