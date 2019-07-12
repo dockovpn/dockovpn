@@ -1,13 +1,9 @@
 #!/bin/bash
 
+source $APP_INSTALL_PATH/runtime/functions.sh
+
 # Exit normally if the count of arguments is 0 i.e we don't have to create a user
 ((!$#)) && echo "Nothing to generate for client!" && exit 0
-
-function datef() {
-    # Output:
-    # Sat Jun  8 20:29:08 2019
-    date "+%a %b  %-d %T %Y"
-}
 
 function createConfig() {
     cd /usr/share/easy-rsa
