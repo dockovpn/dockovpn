@@ -5,10 +5,19 @@ LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 ENV APP_NAME teleport
 ENV APP_INSTALL_PATH /opt/${APP_NAME}
 
+WORKDIR ${APP_INSTALL_PATH}
+
 COPY scripts ${APP_INSTALL_PATH}
 COPY config ${APP_INSTALL_PATH}/config
 
-RUN ${APP_INSTALL_PATH}/buildtime/init.sh
+RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip && \
+    /usr/share/easy-rsa/easyrsa init-pki && \
+    /usr/share/easy-rsa/easyrsa gen-dh && \
+    # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+    # Copy DH file
+    cp pki/dh.pem /etc/openvpn && \
+    # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
+    cp config/server.conf /etc/openvpn/server.conf
 
 EXPOSE 1194/udp
 EXPOSE 8080/tcp
