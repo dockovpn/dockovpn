@@ -7,8 +7,8 @@ ENV APP_INSTALL_PATH /opt/${APP_NAME}
 
 WORKDIR ${APP_INSTALL_PATH}
 
-COPY scripts ${APP_INSTALL_PATH}
-COPY config ${APP_INSTALL_PATH}/config
+COPY scripts .
+COPY config ./config
 
 RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip && \
     /usr/share/easy-rsa/easyrsa init-pki && \
@@ -22,5 +22,5 @@ RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip && \
 EXPOSE 1194/udp
 EXPOSE 8080/tcp
 
-ENTRYPOINT [ "start.sh" ]
+ENTRYPOINT [ "./start.sh" ]
 CMD [ "c" ]
