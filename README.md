@@ -1,7 +1,7 @@
 <p align=center><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/logo-s.png"></p><br>
 
-![Build Status](http://dockovpn.io:3000/build/docker-openvpn)
-![Build Time](http://dockovpn.io:3000/built/docker-openvpn)
+![Build Status](http://cicd.dockovpn.io/build/docker-openvpn)
+![Build Time](http://cicd.dockovpn.io/built/docker-openvpn)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alekslitvinenk/openvpn.svg)](https://hub.docker.com/r/alekslitvinenk/openvpn/)
 [![Gitter chat](https://img.shields.io/badge/chat-on_gitter-50b6bb.svg)](https://gitter.im/docker-openvpn/community)
 ![GitHub](https://img.shields.io/github/license/alekslitvinenk/docker-openvpn)
