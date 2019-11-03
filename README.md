@@ -1,5 +1,10 @@
 <p align=center><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/logo-s.png"></p><br>
 
+<p align="center">
+<a href="https://github.com/alekslitvinenk/docker-openvpn/blob/master/README.md">[English]</a>
+<a href="https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/README_RU.md">[Русский]</a>
+<br>
+
 ![Build Status](http://cicd.dockovpn.io/build/docker-openvpn)
 ![Build Time](http://cicd.dockovpn.io/built/docker-openvpn)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alekslitvinenk/openvpn.svg)](https://hub.docker.com/r/alekslitvinenk/openvpn/)
