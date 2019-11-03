@@ -23,7 +23,7 @@ https://github.com/alekslitvinenk/docker-openvpn
 https://hub.docker.com/r/alekslitvinenk/openvpn
 
 # Видео руководство 📹
-<iframe width="560" height="315" src="https://www.youtube.com/embed/A8zvrHsT9A0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+<p align=center><a href="https://youtu.be/A8zvrHsT9A0"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
 
 # Быстрый старт 🚀
 
