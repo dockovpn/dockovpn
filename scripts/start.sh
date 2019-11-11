@@ -44,7 +44,7 @@ yes
 EOF3
 # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
 
-#C opy server keys and certificates
+# Copy server keys and certificates
 cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
 
 # Need to feed key password
@@ -53,7 +53,7 @@ openvpn --config /etc/openvpn/server.conf &
 # By some strange reason we need to do echo command to get to the next command
 echo " "
 
-# Pass all the arguments of this script ti the user creation script
+# Pass all the arguments of this script to the user creation script
 # Exit normally if the count of arguments is 0 i.e we don't have to create a user
 ((!$#)) && echo "Nothing to generate for client!" && exit 0
 
