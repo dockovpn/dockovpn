@@ -5,8 +5,8 @@
 <a href="https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/README_RU.md">[Русский]</a>
 <br>
 
-![Build Status](http://cicd.dockovpn.io/build/docker-openvpn)
-![Build Time](http://cicd.dockovpn.io/built/docker-openvpn)
+![Build Status](https://cicd.dockovpn.io/build/docker-openvpn)
+![Build Time](https://cicd.dockovpn.io/built/docker-openvpn)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alekslitvinenk/openvpn.svg)](https://hub.docker.com/r/alekslitvinenk/openvpn/)
 [![Gitter chat](https://img.shields.io/badge/chat-on_gitter-50b6bb.svg)](https://gitter.im/docker-openvpn/community)
 ![GitHub](https://img.shields.io/github/license/alekslitvinenk/docker-openvpn)
