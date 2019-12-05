@@ -2,7 +2,7 @@ FROM alpine:3.10.2
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
-ENV APP_NAME teleport
+ENV APP_NAME dockovpn
 ENV APP_INSTALL_PATH /opt/${APP_NAME}
 
 WORKDIR ${APP_INSTALL_PATH}
