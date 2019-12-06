@@ -103,4 +103,4 @@ echo "$(datef) NOTE: After you download you client config, http server will be s
 
 echo "$(datef) Config http server has been shut down"
 
-exec bash
+tail -f /dev/null
