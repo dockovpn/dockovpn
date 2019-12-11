@@ -2,3 +2,4 @@ bin/
 done.txt
 client/
 build_number.txt
+full_version.txt
