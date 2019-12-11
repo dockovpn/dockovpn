@@ -16,3 +16,5 @@ In oder to make release the following steps are required
    - Feature 1
    - Feature 2
    - Feature 3
+
+6. Press "Publish release"
