@@ -16,7 +16,7 @@ function createConfig() {
     # Create mkdir if doesn't exist
     mkdir -p client
 
-    cp pki/private/client.key pki/issued/client.crt pki/ca.crt client
+    cp pki/private/client.key pki/issued/client.crt pki/ca.crt /etc/openvpn/ta.key client
 
     # Set default value to HOST_ADDR if it was not set from environment
     if [ -z "$HOST_ADDR" ]
@@ -33,7 +33,8 @@ function createConfig() {
     cat <(echo -e '<ca>') \
         client/ca.crt <(echo -e '</ca>\n<cert>') \
         client/client.crt <(echo -e '</cert>\n<key>') \
-        client/client.key <(echo -e '</key>') \
+        client/client.key <(echo -e '</key>\n<tls-auth>') \
+        client/ta.key <(echo -e '</tls-auth>') \
         >> client/client.ovpn
 
     echo "$(datef) Client.ovpn file has been generated"
