@@ -10,5 +10,5 @@
 - Rename APP_NAME to dockovpn #35
 - Improve versioning system #46
 
-## v1.1.0
+## v1.1.1
 - Add info about tags and versioning
