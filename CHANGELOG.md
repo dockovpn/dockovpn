@@ -5,7 +5,10 @@
 - Fixed: Use newer version of the base image #28
 - Serve config via default HTTP port 80 #29
 
-## v1.1.0**
+## v1.1.0
 - Remove interactive mode #31
 - Rename APP_NAME to dockovpn #35
 - Improve versioning system #46
+
+## v1.1.0
+- Add info about tags and versioning
