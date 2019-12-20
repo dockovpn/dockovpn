@@ -14,11 +14,18 @@
 # 🔐Docker-OpenVPN
 Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage.
 
-## GitHub repo:
+## GitHub Repo:
 https://github.com/alekslitvinenk/docker-openvpn
 
-## DockerHub repo:
+## DockerHub Repo:
 https://hub.docker.com/r/alekslitvinenk/openvpn
+
+### Docker Tags
+| Tag    | Description | 
+| :----: | :---------: |
+| `latest` | This tag is added to every newly built version be that `v#.#.#` or `v#.#.#-regen-dh` |
+| `v#.#.#` | Standard fixed release version, where {1} is _major version_, {2} - _minor_ and {3} is a _patch_. For instance, `v1.1.0` |
+| `v#.#.#-regen-dh` | Release version with newly generated Deffie Hellman security file. In order to keep security high this version is generated every hour. Tag example - `v1.1.0-regen-dh` |
 
 # Video Guide 📹
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
