@@ -44,6 +44,10 @@ yes
 EOF3
 # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
 
+openvpn --genkey --secret /etc/openvpn/ta.key << EOF4
+yes
+EOF4
+
 # Copy server keys and certificates
 cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
 
@@ -65,14 +69,14 @@ FLAGS=$1
 
 # Switch statement
 case $FLAGS in
-    c)      
+    c)
         createConfig
 
         CONTENT_TYPE=application/text
         FILE_NAME=client.ovpn
         FILE_PATH=client/$FILE_NAME
         ;;
-    cz)      
+    cz)
         createConfig
         zipFiles
 
