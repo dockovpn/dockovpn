@@ -26,6 +26,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | `latest` | This tag is added to every newly built version be that `v#.#.#` or `v#.#.#-regen-dh` |
 | `v#.#.#` | Standard fixed release version, where {1} is _major version_, {2} - _minor_ and {3} is a _patch_. For instance, `v1.1.0` |
 | `v#.#.#-regen-dh` | Release version with newly generated Deffie Hellman security file. In order to keep security high this version is generated every hour. Tag example - `v1.1.0-regen-dh` |
+| `dev` | Development build which contains the most recent changes from the active development branch (master) |
 
 # Video Guide 📹
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
