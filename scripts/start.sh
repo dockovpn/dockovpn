@@ -48,6 +48,9 @@ openvpn --genkey --secret /etc/openvpn/ta.key << EOF4
 yes
 EOF4
 
+# Print app version
+echo "$(datef) $APP_NAME $APP_VERSION"
+
 # Copy server keys and certificates
 cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
 
