@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MAJOR_VERSION=1 # Updated manually
-MINOR_VERSION=1 # Updated manually
+MINOR_VERSION=2 # Updated manually
 BUILD_NUMBER=0
 
 # Create file build_number.txt if it doesn't exist
