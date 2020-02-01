@@ -74,4 +74,5 @@ Congratulations, now you're all set and can safely browse the internet.
 # Other resources
 [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>
 [Code Of Conduct](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CODE_OF_CONDUCT.md)<br>
+[Release Guideline](https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/RELEASE_GUIDELINE.md)<br>
 [License Agreement](https://github.com/alekslitvinenk/docker-openvpn/blob/master/LICENSE)
