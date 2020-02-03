@@ -19,7 +19,7 @@ docker run --cap-add=NET_ADMIN \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 alekslitvinenk/openvpn
 ```
-To get more detailed information, scroll down to our ## 🚀 Quick Start tuturial or watch video https://youtu.be/y5Dwakc6hMs
+To get more detailed information, scroll down to [Quick Start](#🚀-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
 
 ## Website
 https://dockovpn.io
