@@ -32,7 +32,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | `dev` | Development build which contains the most recent changes from the active development branch (master) |
 
 ### Container commands
-After container was run using `docker run` command, it's possible to execute the following commands using `docker exec` command. For example, `docker exec <container id> ./version.sh`. See table below to get the full list of supported commands.
+After container was run using `docker run` command, it's possible to execute additional commands using `docker exec` command. For example, `docker exec <container id> ./version.sh`. See table below to get the full list of supported commands.
 
 | Command  | Description | 
 | :------: | :---------: |
