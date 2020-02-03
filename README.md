@@ -31,6 +31,10 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | `v#.#.#-regen-dh` | Release version with newly generated Deffie Hellman security file. In order to keep security high this version is generated every hour. Tag example - `v1.1.0-regen-dh` |
 | `dev` | Development build which contains the most recent changes from the active development branch (master) |
 
+### Container commands
+| Command  | Description | 
+| :------: | :---------: |
+
 ## 📺 Video Guide
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
 
