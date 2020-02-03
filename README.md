@@ -31,17 +31,17 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | `v#.#.#-regen-dh` | Release version with newly generated Deffie Hellman security file. In order to keep security high this version is generated every hour. Tag example - `v1.1.0-regen-dh` |
 | `dev` | Development build which contains the most recent changes from the active development branch (master) |
 
-## 📺Video Guide
+## 📺 Video Guide
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
 
-## 🚀Quick Start 
+## 🚀 Quick Start 
 
 ### Prerequisites:
 1. Any hardware or vps server running Linux. You should have administrative rights on this machine.
 2. Docker installation on your server.
 3. Public ip address assigned to your server.
 
-## 1. Run docker-openvpn
+### 1. Run docker-openvpn
 Copy & paste the following command to run docker-openvpn:<br>
 ```bash
 docker run --cap-add=NET_ADMIN \
@@ -57,7 +57,7 @@ Sun Jun  9 08:56:12 2019 Client.ovpn file has been generated
 Sun Jun  9 08:56:12 2019 Config server started, download your client.ovpn config at http://example.com:8080/
 Sun Jun  9 08:56:12 2019 NOTE: After you download you client config, http server will be shut down!
  ```
-## 2. Get client configuration
+### 2. Get client configuration
 Now, when your docker-openvpn is up and running you can go to `<your_host_public_ip>:8080` on your device and download ovpn client configuration.
 As soon as you have your config file downloaded, you will see the following output in the console:<br>
 ```
@@ -66,7 +66,7 @@ Sun Jun  9 09:01:15 2019 Config http server has been shut down
 Import `client.ovpn` into your favourite openvpn client. In most cases it should be enough to just doubleclick or tap on that file.
 
 
-## 3. Connect to your docker-openvpn container
+### 3. Connect to your docker-openvpn container
 You should be able to see your newly added client configuration in the list of available configurations. Click on it, connection process should initiate and be established withing few seconds.
 
 Congratulations, now you're all set and can safely browse the internet.
