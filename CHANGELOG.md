@@ -12,3 +12,15 @@
 
 ## v1.1.1
 - Add info about tags and versioning
+
+## v1.2.0
+- Add dev tag with development builds #54
+- Improve security adding tls and stronger ciphers #51
+- Make docker container quit when it receives SIGTERM #34
+- Add printing app version on start and ./version.sh script to get version of running container
+
+## v1.2.1
+- Update documentation
+
+## v1.2.2
+- Update verson info
