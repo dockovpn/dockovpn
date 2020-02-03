@@ -49,7 +49,7 @@ yes
 EOF4
 
 # Print app version
-echo "$(datef) $APP_NAME $APP_VERSION"
+$APP_INSTALL_PATH/version.sh
 
 # Copy server keys and certificates
 cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
