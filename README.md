@@ -32,8 +32,10 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | `dev` | Development build which contains the most recent changes from the active development branch (master) |
 
 ### Container commands
+After container was run using `docker run` command, it's possible to execute the following commands using `docker exec` command. See table below to get the full list of supported commands.
 | Command  | Description | 
 | :------: | :---------: |
+| `./version.sh` | Outputs full container version, i.e `Dockovpn v1.2.0` |
 
 ## 📺 Video Guide
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
