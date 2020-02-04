@@ -24,11 +24,13 @@
 
 ## v1.2.2
 - Update verson info
-<<<<<<< HEAD
-=======
 
 ## v1.3.0
 - Add version badge 
 - Upgrade base image to Alpine Linux 3.11
 - Replace APP_VERSION with VERSION file containing app version
->>>>>>> master
+
+## v1.3.1
+-
+
+
