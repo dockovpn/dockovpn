@@ -1,7 +1,7 @@
 # Component versions
 
 ## Base image
-alpine:3.10.2
+alpine:3.11.3
 
 ## OpenVPN
 OpenVPN 2.4.7 x86_64-alpine-linux-musl [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on May  5 2019
