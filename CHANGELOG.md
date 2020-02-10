@@ -33,4 +33,7 @@
 ## v1.3.1
 -
 
+## v1.3.2
+- Add integration with Travis
+
 
