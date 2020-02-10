@@ -29,3 +29,8 @@
 - Add version badge 
 - Upgrade base image to Alpine Linux 3.11
 - Replace APP_VERSION with VERSION file containing app version
+
+## v1.3.1
+-
+
+
