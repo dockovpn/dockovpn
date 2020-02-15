@@ -36,4 +36,7 @@
 ## v1.3.2
 - Add integration with Travis
 
+## v1.3.3
+- Update README russian version
+
 
