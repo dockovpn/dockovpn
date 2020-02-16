@@ -86,7 +86,7 @@ case $FLAGS in
 
         CONTENT_TYPE=application/zip
         FILE_NAME=client.zip
-        FILE_PATH=$FILE_NAME
+        FILE_PATH="$CLIENT_PATH/$FILE_NAME"
         ;;
     czp)
         # (()) engaes arthimetic context
@@ -99,7 +99,7 @@ case $FLAGS in
 
             CONTENT_TYPE=application/zip
             FILE_NAME=client.zip
-            FILE_PATH=$FILE_NAME
+            FILE_PATH="$CLIENT_PATH/$FILE_NAME"
         fi
         ;;
 esac
