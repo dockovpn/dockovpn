@@ -29,28 +29,28 @@ LOCKFILE=/etc/openvpn/.gen
 # Regenerate certs only on the first start 
 if [ ! -f $LOCKFILE ]; then
 
-    /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
+/usr/share/easy-rsa/easyrsa build-ca nopass << EOF
 
-    EOF
+EOF
     # CA creation complete and you may now import and sign cert requests.
     # Your new CA certificate file for publishing is at:
     # /usr/share/easy-rsa/pki/ca.crt
 
-    /usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
+/usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
 
-    EOF2
+EOF2
     # Keypair and certificate request completed. Your files are:
     # req: /usr/share/easy-rsa/pki/reqs/MyReq.req
     # key: /usr/share/easy-rsa/pki/private/MyReq.key
 
-    /usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
-    yes
-    EOF3
+/usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
+yes
+EOF3
     # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
 
-    openvpn --genkey --secret /etc/openvpn/ta.key << EOF4
-    yes
-    EOF4
+openvpn --genkey --secret /etc/openvpn/ta.key << EOF4
+yes
+EOF4
 
     # Copy server keys and certificates
     cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
