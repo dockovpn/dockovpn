@@ -15,9 +15,10 @@
 # 🔐Docker-OpenVPN
 Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
-docker run --cap-add=NET_ADMIN \
--p 1194:1194/udp -p 80:8080/tcp \
+docker run --name openvpn --cap-add=NET_ADMIN \
+-d -p 1194:1194/udp -p 8090:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
+-v openvpn_conf:/etc/openvpn \
 alekslitvinenk/openvpn
 ```
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
