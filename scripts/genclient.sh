@@ -2,49 +2,48 @@
 
 source ./functions.sh
 
-# Pass all the arguments of this script to the user creation script
-# Exit normally if the count of arguments is 0 i.e we don't have to create a user
-((!$#)) && echo "Nothing to generate for client!" && exit 0
+CLIENT_PATH="$(createConfig)"
+CONTENT_TYPE=application/text
+FILE_NAME=client.ovpn
+FILE_PATH="$CLIENT_PATH/$FILE_NAME"
+echo "$(datef) $FILE_PATH file has been generated"
 
-# Parse string into chars:
-# c    Create user config
-# z    Zip user config
-# p    User password for the zip archive
-FLAGS=$1
+if (($#))
+then
 
-# Switch statement
-case $FLAGS in
-    c)
-        CLIENT_PATH="$(createConfig)"
+    # Parse string into chars:
+    # z    Zip user config
+    # p    User password for the zip archive
+    FLAGS=$1
 
-        CONTENT_TYPE=application/text
-        FILE_NAME=client.ovpn
-        FILE_PATH="$CLIENT_PATH/$FILE_NAME"
-        echo "$(datef) $FILE_PATH file has been generated"
-        ;;
-    cz)
-        CLIENT_PATH="$(createConfig)"
-        zipFiles "$CLIENT_PATH"
-
-        CONTENT_TYPE=application/zip
-        FILE_NAME=client.zip
-        FILE_PATH="$CLIENT_PATH/$FILE_NAME"
-        ;;
-    czp)
-        # (()) engaes arthimetic context
-        if (($# < 2))
-        then
-            echo "Not enogh arguments" && exit 0
-        else
-            CLIENT_PATH="$(createConfig)"
-            zipFilesWithPassword "$CLIENT_PATH" "$2"
+    # Switch statement
+    case $FLAGS in
+        z)
+            zipFiles "$CLIENT_PATH"
 
             CONTENT_TYPE=application/zip
             FILE_NAME=client.zip
             FILE_PATH="$CLIENT_PATH/$FILE_NAME"
-        fi
-        ;;
-esac
+            ;;
+        zp)
+            # (()) engaes arthimetic context
+            if (($# < 2))
+            then
+                echo "$(datef) Not enogh arguments" && exit 0
+            else
+                zipFilesWithPassword "$CLIENT_PATH" "$2"
+
+                CONTENT_TYPE=application/zip
+                FILE_NAME=client.zip
+                FILE_PATH="$CLIENT_PATH/$FILE_NAME"
+            fi
+            ;;
+
+        *) echo "$(datef) Unknown parameters $FLAGS"
+            ;;
+
+    esac
+fi
 
 echo "$(datef) Config server started, download your $FILE_NAME config at http://$HOST_ADDR/"
 echo "$(datef) NOTE: After you download you client config, http server will be shut down!"
