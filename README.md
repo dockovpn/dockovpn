@@ -18,7 +18,7 @@ Out of the box stateless openvpn server docker image which starts in just a few 
 docker run --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
-alekslitvinenk/openvpn
+--name dockovpn alekslitvinenk/openvpn
 ```
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
 
@@ -63,7 +63,7 @@ Copy & paste the following command to run docker-openvpn:<br>
 docker run --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
-alekslitvinenk/openvpn
+--name dockovpn alekslitvinenk/openvpn
 ```
 
 If everything went well, you should be able to see the following output in your console:
