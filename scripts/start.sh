@@ -24,35 +24,41 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 
+LOCKFILE=/etc/openvpn/.gen
 
-/usr/share/easy-rsa/easyrsa build-ca nopass << EOF
+# Regenerate certs only on the first start 
+if [ ! -f $LOCKFILE ]; then
 
-EOF
-# CA creation complete and you may now import and sign cert requests.
-# Your new CA certificate file for publishing is at:
-# /usr/share/easy-rsa/pki/ca.crt
+    /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
 
-/usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
+    EOF
+    # CA creation complete and you may now import and sign cert requests.
+    # Your new CA certificate file for publishing is at:
+    # /usr/share/easy-rsa/pki/ca.crt
 
-EOF2
-# Keypair and certificate request completed. Your files are:
-# req: /usr/share/easy-rsa/pki/reqs/MyReq.req
-# key: /usr/share/easy-rsa/pki/private/MyReq.key
+    /usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
 
-/usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
-yes
-EOF3
-# Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
+    EOF2
+    # Keypair and certificate request completed. Your files are:
+    # req: /usr/share/easy-rsa/pki/reqs/MyReq.req
+    # key: /usr/share/easy-rsa/pki/private/MyReq.key
 
-openvpn --genkey --secret /etc/openvpn/ta.key << EOF4
-yes
-EOF4
+    /usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
+    yes
+    EOF3
+    # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
+
+    openvpn --genkey --secret /etc/openvpn/ta.key << EOF4
+    yes
+    EOF4
+
+    # Copy server keys and certificates
+    cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
+
+fi
 
 # Print app version
 $APP_INSTALL_PATH/version.sh
-
-# Copy server keys and certificates
-cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
 
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
@@ -103,11 +109,16 @@ case $FLAGS in
         ;;
 esac
 
-echo "$(datef) Config server started, download your $FILE_NAME config at http://$HOST_ADDR/"
-echo "$(datef) NOTE: After you download you client config, http server will be shut down!"
+if [ ! -f $LOCKFILE ]; then
 
-{ echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(wc -c <$FILE_PATH)\r\nContent-Type: $CONTENT_TYPE\r\nContent-Disposition: attachment; fileName=\"$FILE_NAME\"\r\nAccept-Ranges: bytes\r\n\r\n"; cat $FILE_PATH; } | nc -w0 -l 8080
+    echo "$(datef) Config server started, download your $FILE_NAME config at http://$HOST_ADDR/"
+    echo "$(datef) NOTE: After you download you client config, http server will be shut down!"
 
-echo "$(datef) Config http server has been shut down"
+    { echo -ne "HTTP/1.1 200 OK\r\nContent-Length: $(wc -c <$FILE_PATH)\r\nContent-Type: $CONTENT_TYPE\r\nContent-Disposition: attachment; fileName=\"$FILE_NAME\"\r\nAccept-Ranges: bytes\r\n\r\n"; cat $FILE_PATH; } | nc -w0 -l 8080
+
+    echo "$(datef) Config http server has been shut down"
+    
+    touch $LOCKFILE
+fi
 
 tail -f /dev/null
