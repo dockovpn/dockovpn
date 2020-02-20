@@ -18,7 +18,7 @@ Out of the box stateless openvpn server docker image which starts in just a few 
 docker run --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
-alekslitvinenk/openvpn
+--name dockovpn alekslitvinenk/openvpn
 ```
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
 
@@ -42,9 +42,10 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 ### Container commands
 After container was run using `docker run` command, it's possible to execute additional commands using `docker exec` command. For example, `docker exec <container id> ./version.sh`. See table below to get the full list of supported commands.
 
-| Command  | Description | 
-| :------: | :---------: |
-| `./version.sh` | Outputs full container version, i.e `Dockovpn v1.2.0` |
+| Command  | Description | Parameters | Example |
+| :------: | :---------: | :--------: | :-----: |
+| `./version.sh` | Outputs full container version, i.e `Dockovpn v1.2.0` |  | `docker exec dockovpn ./version.sh` |
+| `./genclient.sh` | Generates new client configuration | `z` — Optional. Puts newly generated client.ovpn file into client.zip archive.<br><br>`zp paswd` — Optional. Puts newly generated client.ovpn file into client.zip archive with password `pswd` | `docker exec dockovpn ./genclient.sh`<br><br>`docker exec dockovpn ./genclient.sh z`<br><br>`docker exec dockovpn ./genclient.sh zp 123` | 
 
 ## 📺 Video Guide
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
@@ -62,7 +63,7 @@ Copy & paste the following command to run docker-openvpn:<br>
 docker run --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
-alekslitvinenk/openvpn
+--name dockovpn alekslitvinenk/openvpn
 ```
 
 If everything went well, you should be able to see the following output in your console:
