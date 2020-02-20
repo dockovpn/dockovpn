@@ -44,3 +44,6 @@
 
 ## v1.4.0
 - Add possibility to create additional users #78
+
+## v1.4.1
+-
