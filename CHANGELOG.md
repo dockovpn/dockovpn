@@ -42,4 +42,5 @@
 ## v1.3.4
 -
 
-
+## v1.4.0
+- Add possibility to create additional users #78
