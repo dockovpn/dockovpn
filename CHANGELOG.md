@@ -39,4 +39,8 @@
 ## v1.3.3
 - Update README russian version
 
+## v1.3.4
+-
 
+## v1.4.0
+- Add possibility to create additional users #78

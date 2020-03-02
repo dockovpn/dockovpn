@@ -15,10 +15,9 @@
 # 🔐Docker-OpenVPN
 Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
-docker run --name openvpn --cap-add=NET_ADMIN \
--d -p 1194:1194/udp -p 80:8080/tcp \
+docker run --name dockovpn --cap-add=NET_ADMIN \
+-p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
--v openvpn_conf:/etc/openvpn \
 alekslitvinenk/openvpn
 ```
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
@@ -43,9 +42,10 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 ### Container commands
 After container was run using `docker run` command, it's possible to execute additional commands using `docker exec` command. For example, `docker exec <container id> ./version.sh`. See table below to get the full list of supported commands.
 
-| Command  | Description | 
-| :------: | :---------: |
-| `./version.sh` | Outputs full container version, i.e `Dockovpn v1.2.0` |
+| Command  | Description | Parameters | Example |
+| :------: | :---------: | :--------: | :-----: |
+| `./version.sh` | Outputs full container version, i.e `Dockovpn v1.2.0` |  | `docker exec dockovpn ./version.sh` |
+| `./genclient.sh` | Generates new client configuration | `z` — Optional. Puts newly generated client.ovpn file into client.zip archive.<br><br>`zp paswd` — Optional. Puts newly generated client.ovpn file into client.zip archive with password `pswd` | `docker exec dockovpn ./genclient.sh`<br><br>`docker exec dockovpn ./genclient.sh z`<br><br>`docker exec dockovpn ./genclient.sh zp 123` | 
 
 ## 📺 Video Guide
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
@@ -63,7 +63,7 @@ Copy & paste the following command to run docker-openvpn:<br>
 docker run --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
-alekslitvinenk/openvpn
+--name dockovpn alekslitvinenk/openvpn
 ```
 
 If everything went well, you should be able to see the following output in your console:
@@ -86,6 +86,12 @@ Import `client.ovpn` into your favourite openvpn client. In most cases it should
 You should be able to see your newly added client configuration in the list of available configurations. Click on it, connection process should initiate and be established withing few seconds.
 
 Congratulations, now you're all set and can safely browse the internet.
+
+## Persisting configuration
+There's a possibility to persist generated files on in volume storage. Run docker with
+```bash
+-v openvpn_conf:/etc/openvpn
+```
 
 # Other resources
 [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>

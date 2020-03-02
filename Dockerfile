@@ -26,4 +26,3 @@ EXPOSE 8080/tcp
 
 ENTRYPOINT [ "dumb-init", "./start.sh" ]
 VOLUME ["/etc/openvpn"]
-CMD [ "c" ]
