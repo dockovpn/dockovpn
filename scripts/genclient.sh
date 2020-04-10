@@ -38,7 +38,10 @@ then
                 FILE_PATH="$CLIENT_PATH/$FILE_NAME"
             fi
             ;;
-
+        o)
+                cat "$FILE_PATH"
+                exit 0
+            ;;
         *) echo "$(datef) Unknown parameters $FLAGS"
             ;;
 
