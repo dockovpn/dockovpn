@@ -55,6 +55,7 @@ EOF4
     # Copy server keys and certificates
     cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
 
+    touch $LOCKFILE
 fi
 
 # Print app version
