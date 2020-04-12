@@ -90,7 +90,7 @@ Congratulations, now you're all set and can safely browse the internet.
 ## Persisting configuration
 There's a possibility to persist generated files on in volume storage. Run docker with
 ```bash
--v openvpn_conf:/etc/openvpn
+-v openvpn_conf:/doc/Dockovpn
 ```
 
 # Other resources
