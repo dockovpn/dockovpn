@@ -24,35 +24,42 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 
+LOCKFILE=.gen
 
-/usr/share/easy-rsa/easyrsa build-ca nopass << EOF
+# Regenerate certs only on the first start 
+if [ ! -f $LOCKFILE ]; then
+
+    /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
 
 EOF
-# CA creation complete and you may now import and sign cert requests.
-# Your new CA certificate file for publishing is at:
-# /usr/share/easy-rsa/pki/ca.crt
+    # CA creation complete and you may now import and sign cert requests.
+    # Your new CA certificate file for publishing is at:
+    # /usr/share/easy-rsa/pki/ca.crt
 
-/usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
+    /usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
 
 EOF2
-# Keypair and certificate request completed. Your files are:
-# req: /usr/share/easy-rsa/pki/reqs/MyReq.req
-# key: /usr/share/easy-rsa/pki/private/MyReq.key
+    # Keypair and certificate request completed. Your files are:
+    # req: /usr/share/easy-rsa/pki/reqs/MyReq.req
+    # key: /usr/share/easy-rsa/pki/private/MyReq.key
 
-/usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
+    /usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
 yes
 EOF3
-# Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
+    # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
 
-openvpn --genkey --secret /etc/openvpn/ta.key << EOF4
+    openvpn --genkey --secret ta.key << EOF4
 yes
 EOF4
 
-# Print app version
-$APP_INSTALL_PATH/version.sh
+    touch $LOCKFILE
+fi
 
 # Copy server keys and certificates
-cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key /etc/openvpn
+cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key /etc/openvpn
+
+# Print app version
+$APP_INSTALL_PATH/version.sh
 
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &

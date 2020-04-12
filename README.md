@@ -15,10 +15,10 @@
 # 🔐Docker-OpenVPN
 Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
-docker run --cap-add=NET_ADMIN \
+docker run --name dockovpn --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
---name dockovpn alekslitvinenk/openvpn
+alekslitvinenk/openvpn
 ```
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
 
@@ -86,6 +86,12 @@ Import `client.ovpn` into your favourite openvpn client. In most cases it should
 You should be able to see your newly added client configuration in the list of available configurations. Click on it, connection process should initiate and be established withing few seconds.
 
 Congratulations, now you're all set and can safely browse the internet.
+
+## Persisting configuration
+There's a possibility to persist generated files on in volume storage. Run docker with
+```bash
+-v openvpn_conf:/doc/Dockovpn
+```
 
 # Other resources
 [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>
