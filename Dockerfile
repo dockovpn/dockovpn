@@ -24,7 +24,7 @@ RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
 EXPOSE 1194/udp
 EXPOSE 8080/tcp
 
-VOLUME ["/etc/openvpn"]
+VOLUME [ "/opt/Dockovpn" ]
 
 ENTRYPOINT [ "dumb-init", "./start.sh" ]
-CMD [""]
+CMD [ "" ]
