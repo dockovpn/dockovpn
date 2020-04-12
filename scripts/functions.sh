@@ -44,20 +44,28 @@ function createConfig() {
 
 function zipFiles() {
     CLIENT_PATH="$1"
+    IS_QUITE="$2"
+
     # -q to silence zip output
     # -j junk directories
     zip -q -j "$CLIENT_PATH/client.zip" "$CLIENT_PATH/client.ovpn"
-
-    echo "$(datef) $CLIENT_PATH/client.zip file has been generated"
+    if [[ "$IS_QUITE" -ne "-q" ]]
+    then
+       echo "$(datef) $CLIENT_PATH/client.zip file has been generated"
+    fi
 }
 
 function zipFilesWithPassword() {
     CLIENT_PATH="$1"
     ZIP_PASSWORD="$2"
+    IS_QUITE="$3"
     # -q to silence zip output
     # -j junk directories
     # -P pswd use standard encryption, password is pswd
     zip -q -j -P "$ZIP_PASSWORD" "$CLIENT_PATH/client.zip" "$CLIENT_PATH/client.ovpn"
 
-    echo "$(datef) $CLIENT_PATH/client.zip with password protection has been generated"
+    if [[ "$IS_QUITE" -ne "-q" ]]
+    then
+       echo "$(datef) $CLIENT_PATH/client.zip with password protection has been generated"
+    fi
 }
