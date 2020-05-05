@@ -98,7 +98,7 @@ Sometimes it is more convinient to use [docker-compose](https://docs.docker.com/
 
 To run docker-openvpn with docker-compose run:
 ```bash
-HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
+echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
 docker-compose up -d && \
 docker-compose exec -d dockovpn wget -O /doc/Dockovpn/client.ovpn localhost:8080
 ```
