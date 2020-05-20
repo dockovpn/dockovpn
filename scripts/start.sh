@@ -24,6 +24,8 @@ iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 
+cd "$APP_PERSIST_DIR"
+
 LOCKFILE=.gen
 
 # Regenerate certs only on the first start 
@@ -34,19 +36,19 @@ if [ ! -f $LOCKFILE ]; then
 EOF
     # CA creation complete and you may now import and sign cert requests.
     # Your new CA certificate file for publishing is at:
-    # /usr/share/easy-rsa/pki/ca.crt
+    # /opt/Dockovpn_data/pki/ca.crt
 
     /usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
 
 EOF2
     # Keypair and certificate request completed. Your files are:
-    # req: /usr/share/easy-rsa/pki/reqs/MyReq.req
-    # key: /usr/share/easy-rsa/pki/private/MyReq.key
+    # req: /opt/Dockovpn_data/pki/reqs/MyReq.req
+    # key: /opt/Dockovpn_data/pki/private/MyReq.key
 
     /usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
 yes
 EOF3
-    # Certificate created at: /usr/share/easy-rsa/pki/issued/MyReq.crt
+    # Certificate created at: /opt/Dockovpn_data/pki/issued/MyReq.crt
 
     openvpn --genkey --secret ta.key << EOF4
 yes
@@ -57,6 +59,8 @@ fi
 
 # Copy server keys and certificates
 cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key /etc/openvpn
+
+cd "$APP_INSTALL_PATH"
 
 # Print app version
 $APP_INSTALL_PATH/version.sh
