@@ -93,6 +93,18 @@ There's a possibility to persist generated files on in volume storage. Run docke
 -v openvpn_conf:/opt/Dockovpn_data
 ```
 
+## Alternative way. Run with docker-compose
+Sometimes it is more convinient to use [docker-compose](https://docs.docker.com/compose/).
+
+To run docker-openvpn with docker-compose run:
+```bash
+echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
+docker-compose up -d && \
+docker-compose exec -d dockovpn wget -O /doc/Dockovpn/client.ovpn localhost:8080
+```
+
+After run this command you can find your `client.ovpn` inside `openvpn_conf` folder.
+
 # Other resources
 [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>
 [Code Of Conduct](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CODE_OF_CONDUCT.md)<br>
