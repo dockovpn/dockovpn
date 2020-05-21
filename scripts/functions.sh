@@ -7,8 +7,9 @@ function datef() {
 }
 
 function createConfig() {
+    cd "$APP_PERSIST_DIR"
     CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
-    CLIENT_PATH="clients/$CLIENT_ID"
+    CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
 
     # Redirect stderr to the black hole
     /usr/share/easy-rsa/easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
@@ -26,7 +27,7 @@ function createConfig() {
         HOST_ADDR='localhost'
     fi
 
-    cd $APP_INSTALL_PATH
+    cd "$APP_INSTALL_PATH"
     cp config/client.ovpn $CLIENT_PATH
 
     echo -e "\nremote $HOST_ADDR 1194" >> "$CLIENT_PATH/client.ovpn"
@@ -44,20 +45,28 @@ function createConfig() {
 
 function zipFiles() {
     CLIENT_PATH="$1"
+    IS_QUITE="$2"
+
     # -q to silence zip output
     # -j junk directories
     zip -q -j "$CLIENT_PATH/client.zip" "$CLIENT_PATH/client.ovpn"
-
-    echo "$(datef) $CLIENT_PATH/client.zip file has been generated"
+    if [ "$IS_QUITE" != "-q" ]
+    then
+       echo "$(datef) $CLIENT_PATH/client.zip file has been generated"
+    fi
 }
 
 function zipFilesWithPassword() {
     CLIENT_PATH="$1"
     ZIP_PASSWORD="$2"
+    IS_QUITE="$3"
     # -q to silence zip output
     # -j junk directories
     # -P pswd use standard encryption, password is pswd
     zip -q -j -P "$ZIP_PASSWORD" "$CLIENT_PATH/client.zip" "$CLIENT_PATH/client.ovpn"
 
-    echo "$(datef) $CLIENT_PATH/client.zip with password protection has been generated"
+    if [ "$IS_QUITE" != "-q" ]
+    then
+       echo "$(datef) $CLIENT_PATH/client.zip with password protection has been generated"
+    fi
 }
