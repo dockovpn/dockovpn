@@ -44,3 +44,11 @@
 
 ## v1.4.0
 - Add possibility to create additional users #78
+
+## v1.4.1
+-
+
+## v1.5.0
+- Add volume support (by romansavrulin)
+- Add option to output client config in ternminal (by AngryJKirk)
+- Add docker-compose file (by optimistic5)
