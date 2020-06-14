@@ -52,3 +52,6 @@
 - Add volume support (by romansavrulin)
 - Add option to output client config in ternminal (by AngryJKirk)
 - Add docker-compose file (by optimistic5)
+
+## v1.6.0
+- Add support for iOS client Passepartout (https://passepartoutvpn.app/)
