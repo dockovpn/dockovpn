@@ -2,7 +2,7 @@ export FULL_VESRION="$$(cat ./VERSION)-regen-dh"
 
 .PHONY: build build-local build-dev build-test install clean test run
 
-all: build-dev test
+all: build test
 
 build:
 	@echo "Making production version ${FULL_VESRION} of DockOvpn"
