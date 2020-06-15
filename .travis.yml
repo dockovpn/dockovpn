@@ -5,7 +5,6 @@ services:
 
 before_install:
   - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-  - docker build -t alekslitvinenk/openvpn:dev . --no-cache
 
 script:
-  - docker push alekslitvinenk/openvpn:dev
+  - make build-dev
