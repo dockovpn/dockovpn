@@ -20,6 +20,7 @@ build-dev:
 	docker push alekslitvinenk/openvpn:dev
 
 build-test:
+	@echo "Making testing version of DockOvpn"
 	docker build -t alekslitvinenk/openvpn:test . --no-cache
 	docker push alekslitvinenk/openvpn:test
 
