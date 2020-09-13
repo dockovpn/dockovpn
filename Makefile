@@ -1,4 +1,5 @@
 export FULL_VESRION="$$(cat ./VERSION)-regen-dh"
+export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/tests-report}; echo $${TEMP_VAR})
 
 .PHONY: build build-local build-dev build-test install clean test run
 
@@ -33,6 +34,15 @@ clean:
 
 test:
 	@echo "Running tests for DockOvpn ${FULL_VESRION}"
+	@echo "Test reports will be saved in ${TESTS_FOLDER}"
+	docker run \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v ${TESTS_FOLDER}:/target/test-reports \
+	alekslitvinenk/dockovpn-it test
+	for entry in $$(ls -d ${TESTS_FOLDER}/*.xml); \
+	do \
+		mv -f $$entry ${TESTS_FOLDER}/report.xml; \
+	done
 
 run:
 	docker run --cap-add=NET_ADMIN \
