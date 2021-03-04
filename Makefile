@@ -38,11 +38,9 @@ test:
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
+	-e DOCKER_IMAGE_TAG=local \
 	alekslitvinenk/dockovpn-it test
-	#for entry in $$(ls -d ${TESTS_FOLDER}/*.xml); \
-	#do \
-	#	mv -f $$entry ${TESTS_FOLDER}/report.xml; \
-	#done
+	
 
 run:
 	docker run --cap-add=NET_ADMIN \
