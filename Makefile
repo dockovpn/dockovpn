@@ -1,4 +1,5 @@
 export FULL_VESRION="$$(cat ./VERSION)-regen-dh"
+export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/tests-report}; echo $${TEMP_VAR})
 
 .PHONY: build build-local build-dev build-test install clean test run
 
@@ -29,10 +30,17 @@ install:
 
 clean:
 	@echo "Making cleanup"
-	docker rm dockovpn
+	rm -rf ${TESTS_FOLDER}
 
 test:
 	@echo "Running tests for DockOvpn ${FULL_VESRION}"
+	@echo "Test reports will be saved in ${TESTS_FOLDER}"
+	docker run \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v ${TESTS_FOLDER}:/target/test-reports \
+	-e DOCKER_IMAGE_TAG=local \
+	alekslitvinenk/dockovpn-it test
+	
 
 run:
 	docker run --cap-add=NET_ADMIN \
