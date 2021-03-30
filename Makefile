@@ -1,5 +1,5 @@
 export FULL_VESRION="$$(cat ./VERSION)-regen-dh"
-export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/tests-report}; echo $${TEMP_VAR})
+export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/test-reports}; echo $${TEMP_VAR})
 
 .PHONY: build build-local build-dev build-test install clean test run
 
