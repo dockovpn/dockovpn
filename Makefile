@@ -1,15 +1,23 @@
-export FULL_VESRION="$$(cat ./VERSION)-regen-dh"
-export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/test-reports}; echo $${TEMP_VAR})
+export FULL_VERSION_RELEASE="$$(cat ./VERSION)"
+export FULL_VERSION="$$(cat ./VERSION)-regen-dh"
+export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/target/test-reports}; echo $${TEMP_VAR})
 
-.PHONY: build build-local build-dev build-test install clean test run
+.PHONY: build build-release build-local build-dev build-test install clean test run
 
-all: build test
+all: build
 
 build:
-	@echo "Making production version ${FULL_VESRION} of DockOvpn"
-	docker build -t alekslitvinenk/openvpn:${FULL_VESRION} -t alekslitvinenk/openvpn:latest . --no-cache
-	docker push alekslitvinenk/openvpn:${FULL_VESRION}
+	@echo "Making production version ${FULL_VERSION} of DockOvpn"
+	docker build -t alekslitvinenk/openvpn:${FULL_VERSION} -t alekslitvinenk/openvpn:latest . --no-cache
+	docker push alekslitvinenk/openvpn:${FULL_VERSION}
 	docker push alekslitvinenk/openvpn:latest
+
+build-release:
+	@echo "Making manual release version ${FULL_VERSION_RELEASE} of DockOvpn"
+	docker build -t alekslitvinenk/openvpn:${FULL_VERSION_RELEASE} -t ${FULL_VERSION} -t alekslitvinenk/openvpn:latest . --no-cache
+	docker push alekslitvinenk/openvpn:${FULL_VERSION_RELEASE}
+	docker push alekslitvinenk/openvpn:latest
+	# Note: This is by design that we don't push ${FULL_VERSION} to repo
 
 build-local:
 	@echo "Making version of DockOvpn for testing on local machine"
@@ -26,19 +34,19 @@ build-test:
 	docker push alekslitvinenk/openvpn:test
 
 install:
-	@echo "Installing DockOvpn ${FULL_VESRION}"
+	@echo "Installing DockOvpn ${FULL_VERSION}"
 
 clean:
 	@echo "Making cleanup"
 	rm -rf ${TESTS_FOLDER}
 
 test:
-	@echo "Running tests for DockOvpn ${FULL_VESRION}"
+	@echo "Running tests for DockOvpn ${FULL_VERSION}"
 	@echo "Test reports will be saved in ${TESTS_FOLDER}"
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
-	-e DOCKER_IMAGE_TAG=local \
+	-e DOCKER_IMAGE_TAG=latest \
 	alekslitvinenk/dockovpn-it test
 	
 

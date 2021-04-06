@@ -59,3 +59,6 @@
 ## v1.6.1
 - Replaced a bunch of shell scripts with a single Makefile
 - Added integration tests
+
+## v1.6.2
+- Fix failing build
