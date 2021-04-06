@@ -55,3 +55,7 @@
 
 ## v1.6.0
 - Add support for iOS client Passepartout (https://passepartoutvpn.app/)
+
+## v1.6.1
+- Replaced a bunch of shell scripts with a single Makefile
+- Added integration tests
