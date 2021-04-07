@@ -5,3 +5,5 @@ build_number.txt
 full_version.txt
 CHANGELOG-draft.md
 tests-report/
+test-reports/
+target
