@@ -9,7 +9,7 @@
 
 ![Build Version](http://cicd.dockovpn.io/version/docker-openvpn)
 ![Build Status](http://cicd.dockovpn.io/build/docker-openvpn)
-[![Tests Status](http://cicd.dockovpn.io/tests/docker-openvpn)](http://cicd.dockovpn.io/reports/docker-openvpn)
+[![Tests Status](http://cicd.dockovpn.io/tests/docker-openvpn)](https://cicd.dockovpn.io/reports/docker-openvpn)
 ![Build Time](http://cicd.dockovpn.io/built/docker-openvpn)
 [![Docker Pulls](https://img.shields.io/docker/pulls/alekslitvinenk/openvpn.svg)](https://hub.docker.com/r/alekslitvinenk/openvpn/)
 [![Gitter chat](https://img.shields.io/badge/chat-on_gitter-50b6bb.svg)](https://gitter.im/docker-openvpn/community)
