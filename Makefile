@@ -37,8 +37,10 @@ install:
 	@echo "Installing DockOvpn ${FULL_VERSION}"
 
 clean:
-	@echo "Making cleanup"
+	@echo "Remove firectory with generated reports"
 	rm -rf ${TESTS_FOLDER}
+	@echo "Remove shared volume with configs"
+	docker volume rm Dockovpn_data
 
 test:
 	@echo "Running tests for DockOvpn ${FULL_VERSION}"
@@ -46,13 +48,17 @@ test:
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
+	-v Dockovpn_data:/opt/Dockovpn_data \
 	-e DOCKER_IMAGE_TAG=latest \
+	-e RUNNER_CONTAINER=dockovpn-it \
+	--network host \
+	--name dockovpn-it \
+	--rm \
 	alekslitvinenk/dockovpn-it test
-	
 
 run:
 	docker run --cap-add=NET_ADMIN \
-	-v openvpn_conf:/opt/Dockovpn \
+	-v openvpn_conf:/opt/Dockovpn_data \
 	-p 1194:1194/udp -p 80:8080/tcp \
 	-e HOST_ADDR=localhost \
 	--rm \
