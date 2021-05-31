@@ -62,3 +62,8 @@
 
 ## v1.6.2
 - Fix failing build
+
+## v1.6.3
+- Make test-runner container use volume to share config between server and clients
+- Make test-runner container use host network to download configs from Dockovpn container
+- Make test-runner container non-persistent (add --rm flag)
