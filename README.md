@@ -16,10 +16,10 @@
 # 🔐Docker-OpenVPN
 Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
-docker run --name dockovpn --cap-add=NET_ADMIN \
+docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
-alekslitvinenk/openvpn
+--name dockovpn alekslitvinenk/openvpn
 ```
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
 
@@ -54,18 +54,20 @@ After container was run using `docker run` command, it's possible to execute add
 ## 🚀 Quick Start 
 
 ### Prerequisites:
-1. Any hardware or vps server running Linux. You should have administrative rights on this machine.
+1. Any hardware or vps/vds server running Linux. You should have administrative rights on this machine.
 2. Docker installation on your server.
 3. Public ip address assigned to your server.
 
 ### 1. Run docker-openvpn
 Copy & paste the following command to run docker-openvpn:<br>
 ```bash
-docker run --cap-add=NET_ADMIN \
+docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
+**⚠️ Note:** This snippet runs Dockovpn in attached mode which means if you close your terminal window, container will be stopped. 
+To prevent this from happening, you first need to detach container from ssh session. Type `Ctrl+P Ctrl+Q`.
 
 If everything went well, you should be able to see the following output in your console:
 ```
@@ -89,7 +91,7 @@ You should be able to see your newly added client configuration in the list of a
 Congratulations, now you're all set and can safely browse the internet.
 
 ## Persisting configuration
-There's a possibility to persist generated files on in volume storage. Run docker with
+There's a possibility to persist generated files in volume storage. Run docker with
 ```bash
 -v openvpn_conf:/opt/Dockovpn_data
 ```
