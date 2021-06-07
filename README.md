@@ -66,7 +66,7 @@ docker run -it --rm --cap-add=NET_ADMIN \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
-**⚠️ Note:** This snippet runs Dockovpn in attached mode which means if you close your terminal window, container will be stopped. 
+**⚠️ Note:** This snippet runs Dockovpn in attached mode, which means if you close your terminal window, container will be stopped. 
 To prevent this from happening, you first need to detach container from ssh session. Type `Ctrl+P Ctrl+Q`.
 
 If everything went well, you should be able to see the following output in your console:
