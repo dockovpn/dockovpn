@@ -45,6 +45,7 @@ clean:
 test:
 	@echo "Running tests for DockOvpn ${FULL_VERSION}"
 	@echo "Test reports will be saved in ${TESTS_FOLDER}"
+	docker pull alekslitvinenk/dockovpn-it:latest
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
@@ -54,7 +55,7 @@ test:
 	--network host \
 	--name dockovpn-it \
 	--rm \
-	alekslitvinenk/dockovpn-it test
+	alekslitvinenk/dockovpn-it:latest test
 
 run:
 	docker run --cap-add=NET_ADMIN \
