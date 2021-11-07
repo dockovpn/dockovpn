@@ -10,8 +10,12 @@ if [ ! -c /dev/net/tun ]; then
 fi
 
 # Allow UDP traffic on port 1194.
-iptables -A INPUT -i eth0 -p udp -m state --state NEW,ESTABLISHED --dport 1194 -j ACCEPT
-iptables -A OUTPUT -o eth0 -p udp -m state --state ESTABLISHED --sport 1194 -j ACCEPT
+#iptables -A INPUT -i eth0 -p udp -m state --state NEW,ESTABLISHED --dport 1194 -j ACCEPT
+#iptables -A OUTPUT -o eth0 -p udp -m state --state ESTABLISHED --sport 1194 -j ACCEPT
+
+# Allow TCP traffic on port 8080
+iptables -A INPUT -i eth0 -p tcp -m state --state NEW,ESTABLISHED --dport 8080 -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp -m state --state ESTABLISHED --sport 8080 -j ACCEPT
 
 # Allow traffic on the TUN interface.
 iptables -A INPUT -i tun0 -j ACCEPT
@@ -29,41 +33,44 @@ cd "$APP_PERSIST_DIR"
 LOCKFILE=.gen
 
 # Regenerate certs only on the first start 
-if [ ! -f $LOCKFILE ]; then
+#if [ ! -f $LOCKFILE ]; then
 
-    /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
+    #/usr/share/easy-rsa/easyrsa build-ca nopass << EOF
 
-EOF
+#EOF
     # CA creation complete and you may now import and sign cert requests.
     # Your new CA certificate file for publishing is at:
     # /opt/Dockovpn_data/pki/ca.crt
 
-    /usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
+    #/usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
 
-EOF2
+#EOF2
     # Keypair and certificate request completed. Your files are:
     # req: /opt/Dockovpn_data/pki/reqs/MyReq.req
     # key: /opt/Dockovpn_data/pki/private/MyReq.key
 
-    /usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
-yes
-EOF3
+    #/usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
+#yes
+#EOF3
     # Certificate created at: /opt/Dockovpn_data/pki/issued/MyReq.crt
 
-    openvpn --genkey --secret ta.key << EOF4
-yes
-EOF4
+    #openvpn --genkey --secret ta.key << EOF4
+#yes
+#EOF4
 
-    touch $LOCKFILE
-fi
+    #touch $LOCKFILE
+#fi
 
 # Copy server keys and certificates
-cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key /etc/openvpn
+#cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key /etc/openvpn
 
 cd "$APP_INSTALL_PATH"
 
 # Print app version
 $APP_INSTALL_PATH/version.sh
+
+# tls-auth generation
+openvpn --genkey --secret /etc/openvpn/ta.key
 
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
@@ -72,6 +79,6 @@ openvpn --config /etc/openvpn/server.conf &
 echo " "
 
 # Generate client config
-./genclient.sh $@
+#./genclient.sh $@
 
 tail -f /dev/null

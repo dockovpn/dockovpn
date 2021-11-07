@@ -8,9 +8,9 @@ services:
     cap_add:
         - NET_ADMIN
     ports:
-        - 1194:1194/udp
+        - 8080:8080/tcp
     environment:
-        HOST_ADDR: ${HOST_ADDR} 
+        HOST_ADDR: 0.0.0.0 
     volumes:
         - ./openvpn_conf:/doc/Dockovpn
     restart: always
