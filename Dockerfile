@@ -8,12 +8,13 @@ ENV APP_PERSIST_DIR /opt/${APP_NAME}_data
 
 WORKDIR ${APP_INSTALL_PATH}
 
+RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init
+
 COPY scripts .
 COPY config ./config
 COPY VERSION ./config
 
-RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
-    mkdir -p ${APP_PERSIST_DIR} && \
+RUN mkdir -p ${APP_PERSIST_DIR} && \
     cd ${APP_PERSIST_DIR} && \
     /usr/share/easy-rsa/easyrsa init-pki && \
     /usr/share/easy-rsa/easyrsa gen-dh && \
