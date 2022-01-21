@@ -69,7 +69,7 @@ $APP_INSTALL_PATH/version.sh
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
 
-if [ -n $IS_INITIAL ]; then
+if [[ -n $IS_INITIAL ]]; then
     # By some strange reason we need to do echo command to get to the next command
     echo " "
 
