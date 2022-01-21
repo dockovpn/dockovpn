@@ -31,6 +31,9 @@ LOCKFILE=.gen
 # Regenerate certs only on the first start 
 if [ ! -f $LOCKFILE ]; then
 
+    /usr/share/easy-rsa/easyrsa init-pki
+    /usr/share/easy-rsa/easyrsa gen-dh
+    # DH parameters of size 2048 created at APP_PERSIST_DIR/pki/dh.pem
     /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
 
 EOF
@@ -58,7 +61,7 @@ EOF4
 fi
 
 # Copy server keys and certificates
-cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key /etc/openvpn
+cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key pki/dh.pem /etc/openvpn
 
 cd "$APP_INSTALL_PATH"
 
