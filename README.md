@@ -14,7 +14,7 @@
 ![GitHub](https://img.shields.io/github/license/alekslitvinenk/docker-openvpn)
 
 # 🔐Docker-OpenVPN
-Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require presistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
+Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require persistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
