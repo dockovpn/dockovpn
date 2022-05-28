@@ -30,6 +30,7 @@ LOCKFILE=.gen
 
 # Regenerate certs only on the first start 
 if [ ! -f $LOCKFILE ]; then
+    IS_INITIAL="1"
 
     /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
 
@@ -68,10 +69,12 @@ $APP_INSTALL_PATH/version.sh
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
 
-# By some strange reason we need to do echo command to get to the next command
-echo " "
+if [[ -n $IS_INITIAL ]]; then
+    # By some strange reason we need to do echo command to get to the next command
+    echo " "
 
-# Generate client config
-./genclient.sh $@
+    # Generate client config
+    ./genclient.sh $@
+fi
 
 tail -f /dev/null
