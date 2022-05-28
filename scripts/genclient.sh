@@ -7,8 +7,6 @@ CONTENT_TYPE=application/text
 FILE_NAME=client.ovpn
 FILE_PATH="$CLIENT_PATH/$FILE_NAME"
 
-echo "$(datef) $FILE_PATH file has been generated"
-
 if (($#))
 then
 
@@ -69,6 +67,7 @@ then
 
     esac
 fi
+echo "$(datef) $FILE_PATH file has been generated"
 
 echo "$(datef) Config server started, download your $FILE_NAME config at http://$HOST_ADDR/"
 echo "$(datef) NOTE: After you download your client config, http server will be shut down!"
