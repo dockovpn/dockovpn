@@ -97,7 +97,7 @@ There's a possibility to persist generated files in volume storage. Run docker w
 ```
 
 ## Alternative way. Run with docker-compose
-Sometimes it is more convinient to use [docker-compose](https://docs.docker.com/compose/).
+Sometimes it is more convenient to use [docker-compose](https://docs.docker.com/compose/).
 
 To run docker-openvpn with docker-compose run:
 ```bash
