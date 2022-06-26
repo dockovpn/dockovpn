@@ -7,3 +7,5 @@ CHANGELOG-draft.md
 tests-report/
 test-reports/
 target
+.vscode/
+ipv6-leack-test.sh
