@@ -13,8 +13,8 @@
 [![Gitter chat](https://img.shields.io/badge/chat-on_gitter-50b6bb.svg)](https://gitter.im/docker-openvpn/community)
 ![GitHub](https://img.shields.io/github/license/alekslitvinenk/docker-openvpn)
 
-# 🔐Docker-OpenVPN
-Out of the box stateless openvpn server docker image which starts in just a few seconds and doesn't require persistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
+# 🔐DockOvpn
+Out of the box stateless VPN server docker image which starts in just a few seconds and doesn't require persistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
@@ -27,7 +27,7 @@ To get more detailed information, go to [Quick Start](#-quick-start) tutorial or
 https://dockovpn.io
 
 ## GitHub Repo:
-https://github.com/alekslitvinenk/docker-openvpn
+https://github.com/dockovpn/dockovpn
 
 ## DockerHub Repo:
 https://hub.docker.com/r/alekslitvinenk/openvpn
@@ -58,7 +58,7 @@ After container was run using `docker run` command, it's possible to execute add
 2. Docker installation on your server.
 3. Public ip address assigned to your server.
 
-### 1. Run docker-openvpn
+### 1. Run dockovpn
 Copy & paste the following command to run docker-openvpn:<br>
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
@@ -77,7 +77,7 @@ Sun Jun  9 08:56:12 2019 Config server started, download your client.ovpn config
 Sun Jun  9 08:56:12 2019 NOTE: After you download you client config, http server will be shut down!
  ```
 ### 2. Get client configuration
-Now, when your docker-openvpn is up and running you can go to `<your_host_public_ip>:8080` on your device and download ovpn client configuration.
+Now, when your dockovpn is up and running you can go to `<your_host_public_ip>:8080` on your device and download ovpn client configuration.
 As soon as you have your config file downloaded, you will see the following output in the console:<br>
 ```
 Sun Jun  9 09:01:15 2019 Config http server has been shut down
@@ -86,7 +86,7 @@ Import `client.ovpn` into your favourite openvpn client. In most cases it should
 
 
 ### 3. Connect to your docker-openvpn container
-You should be able to see your newly added client configuration in the list of available configurations. Click on it, connection process should initiate and be established withing few seconds.
+You should be able to see your newly added client configuration in the list of available configurations. Click on it, connection process should initiate and be established within few seconds.
 
 Congratulations, now you're all set and can safely browse the internet.
 
@@ -99,7 +99,7 @@ There's a possibility to persist generated files in volume storage. Run docker w
 ## Alternative way. Run with docker-compose
 Sometimes it is more convenient to use [docker-compose](https://docs.docker.com/compose/).
 
-To run docker-openvpn with docker-compose run:
+To run dockvpn with docker-compose run:
 ```bash
 echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
 docker-compose up -d && \
