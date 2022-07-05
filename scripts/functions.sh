@@ -74,6 +74,12 @@ function zipFilesWithPassword() {
 function removeConfig() {
     local CLIENT_ID="$1"
 
-    easyrsa revoke $CLIENT_ID
+    cd "$APP_PERSIST_DIR"
+
+    easyrsa revoke $CLIENT_ID << EOF
+yes
+EOF
     easyrsa gen-crl
+
+    cd "$APP_INSTALL_PATH"
 }
