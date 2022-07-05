@@ -32,21 +32,21 @@ LOCKFILE=.gen
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
 
-    /usr/share/easy-rsa/easyrsa build-ca nopass << EOF
+    easyrsa build-ca nopass << EOF
 
 EOF
     # CA creation complete and you may now import and sign cert requests.
     # Your new CA certificate file for publishing is at:
     # /opt/Dockovpn_data/pki/ca.crt
 
-    /usr/share/easy-rsa/easyrsa gen-req MyReq nopass << EOF2
+    easyrsa gen-req MyReq nopass << EOF2
 
 EOF2
     # Keypair and certificate request completed. Your files are:
     # req: /opt/Dockovpn_data/pki/reqs/MyReq.req
     # key: /opt/Dockovpn_data/pki/private/MyReq.key
 
-    /usr/share/easy-rsa/easyrsa sign-req server MyReq << EOF3
+    easyrsa sign-req server MyReq << EOF3
 yes
 EOF3
     # Certificate created at: /opt/Dockovpn_data/pki/issued/MyReq.crt

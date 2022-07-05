@@ -12,7 +12,7 @@ function createConfig() {
     CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
 
     # Redirect stderr to the black hole
-    /usr/share/easy-rsa/easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+    easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
     # Client sertificate /usr/share/easy-rsa/pki/issued/client.crt
     # CA is by the path /usr/share/easy-rsa/pki/ca.crt
@@ -69,4 +69,11 @@ function zipFilesWithPassword() {
     then
        echo "$(datef) $CLIENT_PATH/client.zip with password protection has been generated"
     fi
+}
+
+function removeConfig() {
+    local CLIENT_ID="$1"
+
+    easyrsa revoke $CLIENT_ID
+    easyrsa gen-clr
 }
