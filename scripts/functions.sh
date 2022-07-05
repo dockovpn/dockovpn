@@ -75,5 +75,5 @@ function removeConfig() {
     local CLIENT_ID="$1"
 
     easyrsa revoke $CLIENT_ID
-    easyrsa gen-clr
+    easyrsa gen-crl
 }
