@@ -8,7 +8,10 @@ function datef() {
 
 function createConfig() {
     cd "$APP_PERSIST_DIR"
-    CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+
+    if [ -z "$CLIENT_ID" ]; then
+        CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+    fi
     CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
 
     # Redirect stderr to the black hole
@@ -30,7 +33,7 @@ function createConfig() {
     cd "$APP_INSTALL_PATH"
     cp config/client.ovpn $CLIENT_PATH
 
-    echo -e "\nremote $HOST_ADDR 1194" >> "$CLIENT_PATH/client.ovpn"
+    echo -e "\nremote $HOST_ADDR ${HOST_PORT:-1194}" >> "$CLIENT_PATH/client.ovpn"
 
     # Embed client authentication files into config file
     cat <(echo -e '<ca>') \
