@@ -49,7 +49,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 
 | Команда  | Описание | Параметры | Пример |
 | :------: | :------: | :-------: | :----: |
-| `./version.sh` | Выводит полную версию контейнера, например `Dockovpn v1.2.0` |
+| `./version.sh` | Выводит полную версию контейнера, например `Dockovpn v1.2.0` | | `docker exec dockovpn ./version.sh` |
 | `./genclient.sh` | Генерирует новую конфигурацию для клиента | `z` — Необязательный. Помещает свежесгенерированный файл client.ovpn в zip архив.<br><br>`zp paswd` — Необязательный. Помещает свежесгенерированный файл client.ovpn в zip архив с защитой паролем `paswd` <br><br>`o` — Необязательный. Выводит клиентский файл конфигурации в консоль. <br><br>`oz` — Необязательный. Помещает свежесгенерированный файл client.ovpn в zip архив и выводит файл в консоль. Лучше всего использовать с переадресацией вывода в файл. <br><br>`ozp paswd` — Необязательный. Выводит zip архив с парольной защитой клиентского файла коифигурации в консоль. Лучше всего использовать с переадресацией вывода в файл. | `docker exec dockovpn ./genclient.sh`<br><br>`docker exec dockovpn ./genclient.sh z`<br><br>`docker exec dockovpn ./genclient.sh zp 123` <br><br>`docker exec dockovpn ./genclient.sh o > client.ovpn`<br><br>`docker exec dockovpn ./genclient.sh oz > client.zip` <br><br>`docker exec dockovpn ./genclient.sh ozp paswd > client.zip`|
  | `./rmclient.sh` | Удалаяет клиентский сертификат. Таким образом все последующие попытки пользователя установить соединение с данным сервером Dockovpn будут отвергаться. | Идентификатор клиента, пример `vFOoQ3Hngz4H790IpRo6JgKR6cMR3YAp`. | `docker exec dockovpn ./rmclient.sh vFOoQ3Hngz4H790IpRo6JgKR6cMR3YAp` |
 
