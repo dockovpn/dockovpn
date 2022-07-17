@@ -55,11 +55,13 @@ EOF3
 yes
 EOF4
 
+    easyrsa gen-crl
+
     touch $LOCKFILE
 fi
 
 # Copy server keys and certificates
-cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key ta.key /etc/openvpn
+cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem ta.key /etc/openvpn
 
 cd "$APP_INSTALL_PATH"
 
