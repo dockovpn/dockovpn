@@ -40,6 +40,9 @@ function createConfig() {
         "$CLIENT_PATH/ta.key" <(echo -e '</tls-auth>') \
         >> "$CLIENT_PATH/client.ovpn"
 
+    # Append client id info to the config
+    echo ";client-id $CLIENT_ID" >> "$CLIENT_PATH/client.ovpn"
+
     echo $CLIENT_PATH
 }
 
