@@ -13,10 +13,11 @@ COPY config ./config
 COPY VERSION ./config
 
 RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
+    ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
     mkdir -p ${APP_PERSIST_DIR} && \
     cd ${APP_PERSIST_DIR} && \
-    /usr/share/easy-rsa/easyrsa init-pki && \
-    /usr/share/easy-rsa/easyrsa gen-dh && \
+    easyrsa init-pki && \
+    easyrsa gen-dh && \
     # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
     # Copy DH file
     cp pki/dh.pem /etc/openvpn && \

@@ -1,51 +1,59 @@
 export FULL_VERSION_RELEASE="$$(cat ./VERSION)"
 export FULL_VERSION="$$(cat ./VERSION)-regen-dh"
 export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/target/test-reports}; echo $${TEMP_VAR})
+export DOCKER_REPO="alekslitvinenk/openvpn"
+export CBRANCH=$$(git rev-parse --abbrev-ref HEAD | tr / -)
 
-.PHONY: build build-release build-local build-dev build-test install clean test run
+.PHONY: build build-release build-local build-dev build-test build-branch install clean test run
 
 all: build
 
 build:
 	@echo "Making production version ${FULL_VERSION} of DockOvpn"
-	docker build -t alekslitvinenk/openvpn:${FULL_VERSION} -t alekslitvinenk/openvpn:latest . --no-cache
-	docker push alekslitvinenk/openvpn:${FULL_VERSION}
-	docker push alekslitvinenk/openvpn:latest
+	docker build -t "${DOCKER_REPO}:${FULL_VERSION}" -t "${DOCKER_REPO}:latest" . --no-cache
+	docker push "${DOCKER_REPO}:${FULL_VERSION}"
+	docker push "${DOCKER_REPO}:latest"
 
 build-release:
 	@echo "Making manual release version ${FULL_VERSION_RELEASE} of DockOvpn"
-	docker build -t alekslitvinenk/openvpn:${FULL_VERSION_RELEASE} -t ${FULL_VERSION} -t alekslitvinenk/openvpn:latest . --no-cache
-	docker push alekslitvinenk/openvpn:${FULL_VERSION_RELEASE}
-	docker push alekslitvinenk/openvpn:latest
+	docker build -t "${DOCKER_REPO}:${FULL_VERSION_RELEASE}" -t ${FULL_VERSION} -t alekslitvinenk/openvpn:latest . --no-cache
+	docker push "${DOCKER_REPO}:${FULL_VERSION_RELEASE}"
+	docker push "${DOCKER_REPO}:latest"
 	# Note: This is by design that we don't push ${FULL_VERSION} to repo
 
 build-local:
 	@echo "Making version of DockOvpn for testing on local machine"
-	docker build -t alekslitvinenk/openvpn:local . --no-cache
+	docker build -t "${DOCKER_REPO}:local" . --no-cache
 
 build-dev:
 	@echo "Making development version of DockOvpn"
-	docker build -t alekslitvinenk/openvpn:dev . --no-cache
-	docker push alekslitvinenk/openvpn:dev
+	docker build -t "${DOCKER_REPO}:dev" . --no-cache
+	docker push "${DOCKER_REPO}:dev"
 
 build-test:
 	@echo "Making testing version of DockOvpn"
-	docker build -t alekslitvinenk/openvpn:test . --no-cache
-	docker push alekslitvinenk/openvpn:test
+	docker build -t "${DOCKER_REPO}:test" . --no-cache
+	docker push "${DOCKER_REPO}:test"
+
+build-branch:
+	@echo "Making build for branch: ${DOCKER_REPO}:${CBRANCH}"
+	docker build -t "${DOCKER_REPO}:${CBRANCH}" --no-cache --progress plain .
+	docker push "${DOCKER_REPO}:${CBRANCH}"
 
 install:
 	@echo "Installing DockOvpn ${FULL_VERSION}"
 
 clean:
-	@echo "Remove firectory with generated reports"
+	@echo "Remove directory with generated reports"
 	rm -rf ${TESTS_FOLDER}
 	@echo "Remove shared volume with configs"
 	docker volume rm Dockovpn_data
 
+# https://github.com/dockovpn/dockovpn-it
 test:
 	@echo "Running tests for DockOvpn ${FULL_VERSION}"
 	@echo "Test reports will be saved in ${TESTS_FOLDER}"
-	docker pull alekslitvinenk/dockovpn-it:latest
+	docker pull alekslitvinenk/dockovpn-it:1.0.0
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
@@ -55,7 +63,7 @@ test:
 	--network host \
 	--name dockovpn-it \
 	--rm \
-	alekslitvinenk/dockovpn-it:latest test
+	alekslitvinenk/dockovpn-it:1.0.0 test
 
 run:
 	docker run --cap-add=NET_ADMIN \
@@ -63,4 +71,4 @@ run:
 	-p 1194:1194/udp -p 80:8080/tcp \
 	-e HOST_ADDR=localhost \
 	--rm \
-	alekslitvinenk/openvpn
+	${DOCKER_REPO}

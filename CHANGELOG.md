@@ -28,7 +28,7 @@
 
 ## v1.6.0
 
-- Add support for iOS client Passepartout (https://passepartoutvpn.app/)
+- Add support for iOS client Passepartout (<https://passepartoutvpn.app/>)
 
 ## v1.5.0
 
@@ -62,7 +62,7 @@
 
 ## v1.3.0
 
-- Add version badge 
+- Add version badge
 - Upgrade base image to Alpine Linux 3.11
 - Replace APP_VERSION with VERSION file containing app version
 

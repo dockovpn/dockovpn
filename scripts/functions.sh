@@ -12,7 +12,7 @@ function createConfig() {
     CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
 
     # Redirect stderr to the black hole
-    /usr/share/easy-rsa/easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+    easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
     # Client sertificate /usr/share/easy-rsa/pki/issued/client.crt
     # CA is by the path /usr/share/easy-rsa/pki/ca.crt
@@ -39,6 +39,9 @@ function createConfig() {
         "$CLIENT_PATH/$CLIENT_ID.key" <(echo -e '</key>\n<tls-auth>') \
         "$CLIENT_PATH/ta.key" <(echo -e '</tls-auth>') \
         >> "$CLIENT_PATH/client.ovpn"
+
+    # Append client id info to the config
+    echo ";client-id $CLIENT_ID" >> "$CLIENT_PATH/client.ovpn"
 
     echo $CLIENT_PATH
 }
@@ -69,4 +72,19 @@ function zipFilesWithPassword() {
     then
        echo "$(datef) $CLIENT_PATH/client.zip with password protection has been generated"
     fi
+}
+
+function removeConfig() {
+    local CLIENT_ID="$1"
+
+    cd "$APP_PERSIST_DIR"
+
+    easyrsa revoke $CLIENT_ID << EOF
+yes
+EOF
+    easyrsa gen-crl
+
+    cp /opt/Dockovpn_data/pki/crl.pem /etc/openvpn
+
+    cd "$APP_INSTALL_PATH"
 }
