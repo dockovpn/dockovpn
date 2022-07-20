@@ -1,5 +1,10 @@
 # Change log
 
+## v1.7.0
+
+- Introduce client revokation API
+- Change LICENSE to GPLv2
+
 ## v1.6.5
 
 - Improve Ru translation
