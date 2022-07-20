@@ -49,10 +49,11 @@ clean:
 	@echo "Remove shared volume with configs"
 	docker volume rm Dockovpn_data
 
+# https://github.com/dockovpn/dockovpn-it
 test:
 	@echo "Running tests for DockOvpn ${FULL_VERSION}"
 	@echo "Test reports will be saved in ${TESTS_FOLDER}"
-	docker pull alekslitvinenk/dockovpn-it:latest
+	docker pull alekslitvinenk/dockovpn-it:1.0.0
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
@@ -62,7 +63,7 @@ test:
 	--network host \
 	--name dockovpn-it \
 	--rm \
-	alekslitvinenk/dockovpn-it:latest test
+	alekslitvinenk/dockovpn-it:1.0.0 test
 
 run:
 	docker run --cap-add=NET_ADMIN \
