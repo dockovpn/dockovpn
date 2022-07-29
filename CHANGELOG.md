@@ -1,5 +1,9 @@
 # Change log
 
+## v1.7.1
+
+- Update badges in README to use new CICD server
+
 ## v1.7.0
 
 - Introduce client revokation API
