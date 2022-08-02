@@ -60,6 +60,16 @@ EOF4
     touch $LOCKFILE
 fi
 
+# Set default value to IPV4_CIDR if it was not set from environment
+if [ -z "$IPV4_CIDR" ]
+then
+    IPV4_CIDR='10.8.0.0/24'
+fi
+
+# write server network by IPV4_CIDR into server.conf
+IPV4_SERVER="server $(ipcalc -4 -a $IPV4_CIDR | sed  's/^ADDRESS*=//') $(ipcalc  -4 -m $IPV4_CIDR  | sed  's/^NETMASK*=//')"
+sed  -i "s/^server.*/$IPV4_SERVER/g" /etc/openvpn/server.conf
+
 # Copy server keys and certificates
 cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem ta.key /etc/openvpn
 
