@@ -5,6 +5,7 @@ LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 ENV APP_NAME Dockovpn
 ENV APP_INSTALL_PATH /opt/${APP_NAME}
 ENV APP_PERSIST_DIR /opt/${APP_NAME}_data
+ENV NET_ADAPTER eth0
 
 WORKDIR ${APP_INSTALL_PATH}
 
