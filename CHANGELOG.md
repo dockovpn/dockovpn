@@ -1,5 +1,9 @@
 # Change log
 
+## v1.8.0
+
+- Add a possibility to specify network adapter (Issue #15)
+
 ## v1.7.1
 
 - Update badges in README to use new CICD server
