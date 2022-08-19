@@ -23,8 +23,7 @@ RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
     # Copy DH file
     cp pki/dh.pem /etc/openvpn && \
     # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
-    cd ${APP_INSTALL_PATH} && \
-    cp config/server.conf /etc/openvpn/server.conf
+    cd ${APP_INSTALL_PATH} 
 
 
 EXPOSE 1194/udp

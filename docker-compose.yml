@@ -4,13 +4,19 @@
 version: '3'
 services:
   dockovpn:
-    image: alekslitvinenk/openvpn
+    # image: alekslitvinenk/openvpn
+    build:
+      context: .
+      dockerfile: Dockerfile
     cap_add:
         - NET_ADMIN
     ports:
         - 1194:1194/udp
     environment:
-        HOST_ADDR: ${HOST_ADDR} 
+        HOST_ADDR: ${HOST_ADDR}
+        VPN_PORT: 1194
+        VPN_PROTOCOL: udp 
+        VPN_IP_RANGE: "10.8.0.0 255.255.255.0"
     volumes:
         - ./openvpn_conf:/doc/Dockovpn
     restart: always
