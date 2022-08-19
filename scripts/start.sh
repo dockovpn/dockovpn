@@ -80,4 +80,6 @@ if [[ -n $IS_INITIAL ]]; then
     ./genclient.sh $@
 fi
 
+createServer
+
 tail -f /dev/null
