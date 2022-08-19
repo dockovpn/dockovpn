@@ -14,3 +14,20 @@ services:
     volumes:
         - ./openvpn_conf:/doc/Dockovpn
     restart: always
+  monitor:
+    image: ruimarinho/openvpn-monitor:latest
+    ports:
+        - 8081:80
+    environment:
+      OPENVPNMONITOR_DEFAULT_DATETIMEFORMAT: "%%d/%%m/%%Y"
+      OPENVPNMONITOR_DEFAULT_LATITUDE: -37
+      OPENVPNMONITOR_DEFAULT_LOGO: logo.jpg
+      OPENVPNMONITOR_DEFAULT_LONGITUDE: 144
+      OPENVPNMONITOR_DEFAULT_MAPS: "True"
+      OPENVPNMONITOR_DEFAULT_MAPSHEIGHT: 500
+      OPENVPNMONITOR_DEFAULT_SITE: Test
+      OPENVPNMONITOR_SITES_0_ALIAS: UDP
+      OPENVPNMONITOR_SITES_0_HOST: dockovpn
+      OPENVPNMONITOR_SITES_0_NAME: UDP
+      OPENVPNMONITOR_SITES_0_PORT: 5555
+      OPENVPNMONITOR_SITES_0_SHOWDISCONNECT: "True"
