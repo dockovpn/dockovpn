@@ -47,8 +47,8 @@ function createConfig() {
 }
 
 function createServer() {
-    eval "echo \"$(<config/server.conf)\"" > /etc/openvpn/server.conf
-}
+    eval "echo \"$(<config/server.conf)\"" 
+  }
 
 function zipFiles() {
     CLIENT_PATH="$1"
