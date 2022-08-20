@@ -18,7 +18,7 @@ services:
         PROTOCOL: udp 
         IP_BASE: "10.8.0.0"
         IP_BASE_MASK: "255.255.255.0"
-        VPN_IP_NET: "10.8.0.0/24"
+        IP_NET: "10.8.0.0/24"
     volumes:
         - ./openvpn_conf:/doc/Dockovpn
     restart: always
