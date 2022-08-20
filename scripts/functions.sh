@@ -30,7 +30,7 @@ function createConfig() {
     cd "$APP_INSTALL_PATH"
     cp config/client.ovpn $CLIENT_PATH
 
-    echo -e "\nremote $HOST_ADDR ${VPN_PORT:=1194}" >> "$CLIENT_PATH/client.ovpn"
+    echo -e "\nremote $HOST_ADDR ${PORT:=1194}" >> "$CLIENT_PATH/client.ovpn"
 
     # Embed client authentication files into config file
     cat <(echo -e '<ca>') \
@@ -45,10 +45,6 @@ function createConfig() {
 
     echo $CLIENT_PATH
 }
-
-function createServer() {
-    eval "echo \"$(<config/server.conf)\"" 
-  }
 
 function zipFiles() {
     CLIENT_PATH="$1"
