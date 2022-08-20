@@ -13,7 +13,7 @@ COPY scripts .
 COPY config ./config
 COPY VERSION ./config
 
-RUN apk add --no-cache perl make git openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
+RUN apk add --no-cache python3 py-pip openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
     mkdir -p ${APP_PERSIST_DIR} && \
     cd ${APP_PERSIST_DIR} && \
@@ -24,10 +24,7 @@ RUN apk add --no-cache perl make git openvpn easy-rsa bash netcat-openbsd zip du
     cp pki/dh.pem /etc/openvpn && \
     # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
     cd ${APP_INSTALL_PATH} && \ 
-    git clone https://github.com/bbugyi200/cookie /cookie && \ 
-    cd /cookie && \ 
-    make install && \ 
-    rm -rf /cookie 
+    pip install cookiecutter 
 
 
 EXPOSE 1194/udp

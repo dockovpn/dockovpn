@@ -11,8 +11,8 @@ if [ ! -c /dev/net/tun ]; then
 fi
 
 # Allow UDP traffic on port 1194.
-iptables -A INPUT -i $ADAPTER -p udp -m state --state NEW,ESTABLISHED --dport $VPN_PORT -j ACCEPT
-iptables -A OUTPUT -o $ADAPTER -p udp -m state --state ESTABLISHED --sport $VPN_PORT -j ACCEPT
+iptables -A INPUT -i $ADAPTER -p udp -m state --state NEW,ESTABLISHED --dport $PORT -j ACCEPT
+iptables -A OUTPUT -o $ADAPTER -p udp -m state --state ESTABLISHED --sport $PORT -j ACCEPT
 
 # Allow traffic on the TUN interface.
 iptables -A INPUT -i tun0 -j ACCEPT
@@ -20,7 +20,7 @@ iptables -A FORWARD -i tun0 -j ACCEPT
 iptables -A OUTPUT -o tun0 -j ACCEPT
 
 # Allow forwarding traffic only from the VPN.
-iptables -A FORWARD -i tun0 -o $ADAPTER -s $VPN_IP_NET -j ACCEPT
+iptables -A FORWARD -i tun0 -o $ADAPTER -s $IP_NET -j ACCEPT
 iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 iptables -t nat -A POSTROUTING -s $VPN_IP_NET -o $ADAPTER -j MASQUERADE
@@ -80,6 +80,21 @@ if [[ -n $IS_INITIAL ]]; then
     ./genclient.sh $@
 fi
 
-createServer > /etc/openvpn/server.conf
+echo "$(cat <<eom
+{
+  "name": "server",
+  "port": "${port:=1194}",
+  "protocol": "${protocol:=udp}",
+  "ip_base": "${ip_base:=10.8.0.0}",
+  "ip_base_mask": "${ip_base_mask:=255.255.255.0}",
+  "dns1": "${dns1:=208.67.222.222}",
+  "dns2": "${dns2:=208.67.222.220}"
+}
+eom
+)" > ./config/cookiecutter.json
+
+cookiecutter --no-input /opt/Dockovpn/config 
+
+mv /opt/Dockovpn/server/server.conf /etc/openvpn/server.conf
 
 tail -f /dev/null
