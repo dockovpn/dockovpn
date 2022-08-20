@@ -23,7 +23,7 @@ iptables -A OUTPUT -o tun0 -j ACCEPT
 iptables -A FORWARD -i tun0 -o $ADAPTER -s $IP_NET -j ACCEPT
 iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-iptables -t nat -A POSTROUTING -s $VPN_IP_NET -o $ADAPTER -j MASQUERADE
+iptables -t nat -A POSTROUTING -s $IP_NET -o $ADAPTER -j MASQUERADE
 
 cd "$APP_PERSIST_DIR"
 
