@@ -69,6 +69,29 @@ cd "$APP_INSTALL_PATH"
 # Print app version
 $APP_INSTALL_PATH/version.sh
 
+# make the defaults of the cookiecutter.json
+echo "$(cat <<eom
+{
+  "name": "server",
+  "port": "${PORT:=1194}",
+  "protocol": "${PROTOCOL:=udp}",
+  "ip_base": "${IP_BASE:=10.8.0.0}",
+  "ip_base_mask": "${IP_BASE_MASK:=255.255.255.0}",
+  "dns1": "${DNS1:=208.67.222.222}",
+  "dns2": "${DNS2:=208.67.222.220}"
+}
+eom
+)" > ./config/cookiecutter.json
+
+# This will use the above defaults and not ask for user input
+cookiecutter --no-input /opt/Dockovpn/config 
+
+# move the config to where it belongs
+mv /opt/Dockovpn/server/server.conf /etc/openvpn/server.conf
+
+# clean up 
+rm -rf /opt/Dockovpn/server 
+
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
 
@@ -80,21 +103,5 @@ if [[ -n $IS_INITIAL ]]; then
     ./genclient.sh $@
 fi
 
-echo "$(cat <<eom
-{
-  "name": "server",
-  "port": "${port:=1194}",
-  "protocol": "${protocol:=udp}",
-  "ip_base": "${ip_base:=10.8.0.0}",
-  "ip_base_mask": "${ip_base_mask:=255.255.255.0}",
-  "dns1": "${dns1:=208.67.222.222}",
-  "dns2": "${dns2:=208.67.222.220}"
-}
-eom
-)" > ./config/cookiecutter.json
-
-cookiecutter --no-input /opt/Dockovpn/config 
-
-mv /opt/Dockovpn/server/server.conf /etc/openvpn/server.conf
 
 tail -f /dev/null

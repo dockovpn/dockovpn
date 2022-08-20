@@ -14,9 +14,10 @@ services:
         - 1194:1194/udp
     environment:
         HOST_ADDR: ${HOST_ADDR}
-        VPN_PORT: 1194
-        VPN_PROTOCOL: udp 
-        VPN_IP_RANGE: "10.8.0.0 255.255.255.0"
+        PORT: 1194
+        PROTOCOL: udp 
+        IP_BASE: "10.8.0.0"
+        IP_BASE_MASK: "255.255.255.0"
         VPN_IP_NET: "10.8.0.0/24"
     volumes:
         - ./openvpn_conf:/doc/Dockovpn
