@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ ! -d $APP_PERSIST_DIR/pki ] && cp -r /build/* $APP_PERSIST_DIR/
+
 ADAPTER="${NET_ADAPTER:=eth0}"
 source ./functions.sh
 

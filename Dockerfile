@@ -16,7 +16,8 @@ COPY VERSION ./config
 RUN apk add --no-cache python3 py-pip openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
     mkdir -p ${APP_PERSIST_DIR} && \
-    cd ${APP_PERSIST_DIR} && \
+    mkdir -p /build && \
+    cd /build && \
     easyrsa init-pki && \
     easyrsa gen-dh && \
     # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
