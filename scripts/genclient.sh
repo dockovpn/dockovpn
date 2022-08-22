@@ -2,10 +2,9 @@
 
 source ./functions.sh
 
-CLIENT_PATH="$(createConfig)"
+RANDOM_CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
 CONTENT_TYPE=application/text
 FILE_NAME=client.ovpn
-FILE_PATH="$CLIENT_PATH/$FILE_NAME"
 
 if (($#))
 then
@@ -18,6 +17,7 @@ then
     # Switch statement
     case $FLAGS in
         z)
+            CLIENT_PATH="$(createConfig $3)"
             zipFiles "$CLIENT_PATH"
 
             CONTENT_TYPE=application/zip
@@ -25,6 +25,8 @@ then
             FILE_PATH="$CLIENT_PATH/$FILE_NAME"
             ;;
         zp)
+
+            CLIENT_PATH="$(createConfig $3)"
             # (()) engaes arthimetic context
             if (($# < 2))
             then
@@ -38,10 +40,14 @@ then
             fi
             ;;
         o)
+                CLIENT_PATH="$(createConfig $2)"
+                FILE_PATH="$CLIENT_PATH/$FILE_NAME"
                 cat "$FILE_PATH"
                 exit 0
             ;;
         oz)
+
+            CLIENT_PATH="$(createConfig $2)"
             zipFiles "$CLIENT_PATH" -q
 
             FILE_NAME=client.zip
@@ -50,6 +56,9 @@ then
             exit 0
             ;;
         ozp)
+
+            CLIENT_PATH="$(createConfig $3)"
+            FILE_PATH="$CLIENT_PATH/$FILE_NAME"
             if (($# < 2))
             then
                 echo "$(datef) Not enough arguments" && exit 1

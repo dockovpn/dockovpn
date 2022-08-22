@@ -8,8 +8,11 @@ function datef() {
 
 function createConfig() {
     cd "$APP_PERSIST_DIR"
-    CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+    ARG1=$1
+    DEFAULT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+    CLIENT_ID="${ARG1:=$DEFAULT_ID}"
     CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
+    [ -d $CLIENT_PATH ] && CLIENT_PATH=${CLIENT_PATH}_1
 
     # Redirect stderr to the black hole
     easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
