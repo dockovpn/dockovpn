@@ -21,16 +21,10 @@ function createConfig() {
 
     cp "pki/private/$CLIENT_ID.key" "pki/issued/$CLIENT_ID.crt" pki/ca.crt /etc/openvpn/ta.key $CLIENT_PATH
 
-    # Set default value to HOST_ADDR if it was not set from environment
-    if [ -z "$HOST_ADDR" ]
-    then
-        HOST_ADDR='localhost'
-    fi
-
     cd "$APP_INSTALL_PATH"
     cp config/client.ovpn $CLIENT_PATH
 
-    echo -e "\nremote $HOST_ADDR 1194" >> "$CLIENT_PATH/client.ovpn"
+    echo -e "\nremote $HOST_ADDR $HOST_TUN_PORT" >> "$CLIENT_PATH/client.ovpn"
 
     # Embed client authentication files into config file
     cat <(echo -e '<ca>') \
