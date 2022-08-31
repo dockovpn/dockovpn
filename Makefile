@@ -4,7 +4,7 @@ export TESTS_FOLDER=$$(TEMP_VAR=$${TESTS_REPORT:-$${PWD}/target/test-reports}; e
 export DOCKER_REPO="alekslitvinenk/openvpn"
 export CBRANCH=$$(git rev-parse --abbrev-ref HEAD | tr / -)
 
-.PHONY: build build-release build-local build-dev build-test build-branch install clean test run
+.PHONY: build build-release build-local build-dev build-test build-branch install clean test test-branch run
 
 all: build
 
@@ -60,6 +60,24 @@ test:
 	-v Dockovpn_data:/opt/Dockovpn_data \
 	-e DOCKER_IMAGE_TAG=latest \
 	-e RUNNER_CONTAINER=dockovpn-it \
+	--network host \
+	--name dockovpn-it \
+	--rm \
+	alekslitvinenk/dockovpn-it:1.0.0 test
+
+# https://github.com/dockovpn/dockovpn-it
+# For testing locally on macOS or Windows (where DockerDesktop is running)
+test-branch:
+	@echo "Running tests for DockOvpn ${CBRANCH}"
+	@echo "Test reports will be saved in ${TESTS_FOLDER}"
+	docker pull alekslitvinenk/dockovpn-it:1.0.0
+	docker run \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v ${TESTS_FOLDER}:/target/test-reports \
+	-v Dockovpn_data:/opt/Dockovpn_data \
+	-e DOCKER_IMAGE_TAG=${CBRANCH} \
+	-e RUNNER_CONTAINER=dockovpn-it \
+	-e LOCAL_HOST="0.0.0.0" \
 	--network host \
 	--name dockovpn-it \
 	--rm \

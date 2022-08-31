@@ -2,10 +2,16 @@ FROM alpine:3.14.1
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
+# System settings. User normally shouldn't change these parameters
 ENV APP_NAME Dockovpn
 ENV APP_INSTALL_PATH /opt/${APP_NAME}
 ENV APP_PERSIST_DIR /opt/${APP_NAME}_data
+
+# Configuration settings with default values
 ENV NET_ADAPTER eth0
+ENV HOST_ADDR localhost
+ENV HOST_TUN_PORT 1194
+ENV HOST_CONF_PORT 80
 
 WORKDIR ${APP_INSTALL_PATH}
 

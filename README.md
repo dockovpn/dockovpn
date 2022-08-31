@@ -33,12 +33,35 @@ https://github.com/dockovpn/dockovpn
 https://hub.docker.com/r/alekslitvinenk/openvpn
 
 ### Docker Tags
-| Tag    | Description | 
+| Tag    | Description |
 | :----: | :---------: |
 | `latest` | This tag is added to every newly built version be that `v#.#.#` or `v#.#.#-regen-dh` |
 | `v#.#.#` | Standard fixed release version, where {1} is _major version_, {2} - _minor_ and {3} is a _patch_. For instance, `v1.1.0` |
 | `v#.#.#-regen-dh` | Release version with newly generated Deffie Hellman security file. In order to keep security high this version is generated every hour. Tag example - `v1.1.0-regen-dh` |
 | `dev` | Development build which contains the most recent changes from the active development branch (master) |
+
+### Environment variables
+| Variable | Description | Default value |
+| :------: | :---------: | :-----------: |
+| NET_ADAPTER | Network adapter to use on the host machine | eth0 |
+| HOST_ADDR | Host address to advertise in the client config file | localhost |
+| HOST_TUN_PORT | Tunnel port to advertise in the client config file | 1194 |
+| HOST_CONF_PORT | HTTP port on the host machine to download the client config file | 80 |
+
+**⚠️ Note:** In the provided code snippet we advertise the configuration suitable for the most users. We don't recommend setting custom 
+NET_ADAPTER and HOST_ADDR unless you absolutely have to. HOST_ADDR is determined automatically by running shell subcommand `$(curl -s https://api.ipify.org)`.
+More often you'd like to customize HOST_TUN_PORT and HOST_CONF_PORT. If this is the case, use the snippet below (dont forget to replace `<custom port>` with your values):
+
+```shell
+DOCKOVPN_CONFIG_PORT=<custom port>
+DOCKOVPN_TUNNEL_PORT=<custom port>
+docker run -it --rm --cap-add=NET_ADMIN \
+-p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
+-e HOST_ADDR=$(curl -s https://api.ipify.org) \
+-e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
+-e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
+--name dockovpn alekslitvinenk/openvpn
+```
 
 ### Container commands
 After container was run using `docker run` command, it's possible to execute additional commands using `docker exec` command. For example, `docker exec <container id> ./version.sh`. See table below to get the full list of supported commands.
