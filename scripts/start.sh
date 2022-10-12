@@ -80,7 +80,8 @@ echo "$(cat <<eom
   "ip_base": "${IP_BASE:=10.8.0.0}",
   "ip_base_mask": "${IP_BASE_MASK:=255.255.255.0}",
   "dns1": "${DNS1:=208.67.222.222}",
-  "dns2": "${DNS2:=208.67.222.220}"
+  "dns2": "${DNS2:=208.67.222.220}",
+  "client2client": "${CLIENT2CLIENT:=true}"
 }
 eom
 )" > ./config/cookiecutter.json

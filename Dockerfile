@@ -25,7 +25,8 @@ RUN apk add --no-cache python3 py-pip openvpn easy-rsa bash netcat-openbsd zip d
     cp pki/dh.pem /etc/openvpn && \
     # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
     cd ${APP_INSTALL_PATH} && \ 
-    pip install cookiecutter 
+    pip install cookiecutter && \
+    mkdir -p /etc/openvpn
 
 
 EXPOSE 1194/udp
