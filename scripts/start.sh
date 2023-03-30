@@ -33,6 +33,9 @@ LOCKFILE=.gen
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
 
+    easyrsa init-pki
+    easyrsa gen-dh
+
     easyrsa build-ca nopass << EOF
 
 EOF
@@ -62,7 +65,7 @@ EOF4
 fi
 
 # Copy server keys and certificates
-cp pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem ta.key /etc/openvpn
+cp pki/dh.pem pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem ta.key /etc/openvpn
 
 cd "$APP_INSTALL_PATH"
 
