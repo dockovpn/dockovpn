@@ -14,6 +14,8 @@
 ![GitHub](https://img.shields.io/github/license/dockovpn/dockovpn)
 
 # 🔐DockOvpn
+<p align=center><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/VPN53-Badge-300x300.png"></p><br>
+
 Out of the box stateless VPN server docker image which starts in just a few seconds and doesn't require persistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
