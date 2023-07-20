@@ -14,27 +14,35 @@
 ![GitHub](https://img.shields.io/github/license/dockovpn/dockovpn)
 
 # 🔐DockOvpn
-<p align=center><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/VPN53-Badge-300x300.png"></p><br>
+<p align=center><a href="https://techround.co.uk/vpns/11-dockovpn-solutions/" target="_blank"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/VPN53-Badge-300x300.png"  width="198" height="198"></a></p><br>
 
 Out of the box stateless VPN server docker image which starts in just a few seconds and doesn't require persistent storage. To get it running,  just copy & paste the snippet below and follow instructions in your terminal:
+
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
+
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
 
-## Website
-https://dockovpn.io
+## Resources
 
-## GitHub Repo:
-https://github.com/dockovpn/dockovpn
+### Website
 
-## DockerHub Repo:
-https://hub.docker.com/r/alekslitvinenk/openvpn
+<https://dockovpn.io>
+
+### GitHub Repo
+
+<https://github.com/dockovpn/dockovpn>
+
+### DockerHub Repo
+
+<https://hub.docker.com/r/alekslitvinenk/openvpn>
 
 ### Docker Tags
+
 | Tag    | Description |
 | :----: | :---------: |
 | `latest` | This tag is added to every newly built version be that `v#.#.#` or `v#.#.#-regen-dh` |
@@ -43,6 +51,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | `dev` | Development build which contains the most recent changes from the active development branch (master) |
 
 ### Environment variables
+
 | Variable | Description | Default value |
 | :------: | :---------: | :-----------: |
 | NET_ADAPTER | Network adapter to use on the host machine | eth0 |
@@ -66,6 +75,7 @@ docker run -it --rm --cap-add=NET_ADMIN \
 ```
 
 ### Container commands
+
 After container was run using `docker run` command, it's possible to execute additional commands using `docker exec` command. For example, `docker exec <container id> ./version.sh`. See table below to get the full list of supported commands.
 
 | Command  | Description | Parameters | Example |
@@ -75,57 +85,71 @@ After container was run using `docker run` command, it's possible to execute add
  | `./rmclient.sh` | Revokes client certificate thus making him/her anable to connect to given Dockovpn server. | Client Id, i.e `vFOoQ3Hngz4H790IpRo6JgKR6cMR3YAp`. | `docker exec dockovpn ./rmclient.sh vFOoQ3Hngz4H790IpRo6JgKR6cMR3YAp` |
 
 ## 📺 Video Guide
+
 <p align=center><a href="https://youtu.be/y5Dwakc6hMs"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/video-cover-play.png"></a></p><br>
 
-## 🚀 Quick Start 
+## 🚀 Quick Start
 
-### Prerequisites:
+### Prerequisites
+
 1. Any hardware or vps/vds server running Linux. You should have administrative rights on this machine.
 2. Docker installation on your server.
 3. Public ip address assigned to your server.
 
 ### 1. Run dockovpn
+
 Copy & paste the following command to run docker-openvpn:<br>
+
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
+
 **⚠️ Note:** This snippet runs Dockovpn in attached mode, which means if you close your terminal window, container will be stopped. 
 To prevent this from happening, you first need to detach container from ssh session. Type `Ctrl+P Ctrl+Q`.
 
 If everything went well, you should be able to see the following output in your console:
-```
+
+```bash
 Sun Jun  9 08:56:11 2019 Initialization Sequence Completed
 Sun Jun  9 08:56:12 2019 Client.ovpn file has been generated
 Sun Jun  9 08:56:12 2019 Config server started, download your client.ovpn config at http://example.com:8080/
 Sun Jun  9 08:56:12 2019 NOTE: After you download you client config, http server will be shut down!
  ```
+
 ### 2. Get client configuration
+
 Now, when your dockovpn is up and running you can go to `<your_host_public_ip>:8080` on your device and download ovpn client configuration.
 As soon as you have your config file downloaded, you will see the following output in the console:<br>
-```
+
+```bash
 Sun Jun  9 09:01:15 2019 Config http server has been shut down
 ```
+
 Import `client.ovpn` into your favourite openvpn client. In most cases it should be enough to just doubleclick or tap on that file.
 
-
 ### 3. Connect to your docker-openvpn container
+
 You should be able to see your newly added client configuration in the list of available configurations. Click on it, connection process should initiate and be established within few seconds.
 
 Congratulations, now you're all set and can safely browse the internet.
 
 ## Persisting configuration
+
 There's a possibility to persist generated files in volume storage. Run docker with
+
 ```bash
 -v openvpn_conf:/opt/Dockovpn_data
 ```
 
 ## Alternative way. Run with docker-compose
+
 Sometimes it is more convenient to use [docker-compose](https://docs.docker.com/compose/).
 
 To run dockvpn with docker-compose run:
+
 ```bash
 echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
 docker-compose up -d && \
@@ -135,6 +159,7 @@ docker-compose exec -d dockovpn wget -O /doc/Dockovpn/client.ovpn localhost:8080
 After run this command you can find your `client.ovpn` inside `openvpn_conf` folder.
 
 # Other resources
+
 [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>
 [Code Of Conduct](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CODE_OF_CONDUCT.md)<br>
 [Release Guideline](https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/RELEASE_GUIDELINE.md)<br>
