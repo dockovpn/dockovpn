@@ -33,13 +33,19 @@ To get more detailed information, go to [Quick Start](#-quick-start) tutorial or
 
 <https://dockovpn.io>
 
-### GitHub Repo
+### Socail media
 
-<https://github.com/dockovpn/dockovpn>
+| Name | URL |
+| :--: | :-----: |
+| LinkedIn | <https://www.linkedin.com/company/dockovpn> |
+| Facebook | <https://www.facebook.com/dockovpn> |
 
-### DockerHub Repo
+### Repos
 
-<https://hub.docker.com/r/alekslitvinenk/openvpn>
+| Name | URL |
+| :--: | :-----: |
+| GitHub | <https://github.com/dockovpn/dockovpn> |
+| Docker Hub | <https://hub.docker.com/r/alekslitvinenk/openvpn> |
 
 ### Docker Tags
 
