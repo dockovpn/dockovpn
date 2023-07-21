@@ -59,7 +59,7 @@ To get more detailed information, go to [Quick Start](#-quick-start) tutorial or
 
 ## Container properties
 
-<p align=center><a href="https://dockovpn.io" target="_blank"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/container.svg"  width="150" height="120"></a></p><br>
+<p align=center><a href="https://dockovpn.io" target="_blank"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/container.svg"  width="150" height="110"></a></p>
 
 ### Docker Tags
 
