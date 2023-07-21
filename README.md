@@ -47,6 +47,10 @@ To get more detailed information, go to [Quick Start](#-quick-start) tutorial or
 | GitHub | <https://github.com/dockovpn/dockovpn> |
 | Docker Hub | <https://hub.docker.com/r/alekslitvinenk/openvpn> |
 
+## Container properties
+
+<p align=center><a href="https://dockovpn.io" target="_blank"><img src="https://alekslitvinenk.github.io/docker-openvpn/assets/img/container.svg"  width="198" height="198"></a></p><br>
+
 ### Docker Tags
 
 | Tag    | Description |
