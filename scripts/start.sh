@@ -1,5 +1,39 @@
 #!/bin/bash
 
+SHORT=c:,r
+LONG=client:,regenerate
+OPTS=$(getopt -a -n dockovpn --options $SHORT --longoptions $LONG -- "$@")
+
+if [[ $? -ne 0 ]] ; then
+    exit 1
+fi
+
+eval set -- "$OPTS"
+
+while :
+do
+  case "$1" in
+    -c | --client )
+      CLIENT_OPTS="$2"
+      shift 2;
+      ;;
+    -r | --regenerate)
+      REGENERATE="1"
+      shift;
+      ;;
+    --)
+      shift;
+      break
+      ;;
+    *)
+      echo "Unexpected option: $1"
+      exit 1
+      ;;
+  esac
+done
+
+echo "Rest arguments: $@"
+
 ADAPTER="${NET_ADAPTER:=eth0}"
 source ./functions.sh
 
@@ -80,7 +114,7 @@ if [[ -n $IS_INITIAL ]]; then
     echo " "
 
     # Generate client config
-    ./genclient.sh $@
+    ./genclient.sh $CLIENT_OPTS
 fi
 
 tail -f /dev/null
