@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SHORT=c:,r
-LONG=client:,regenerate
+SHORT=r
+LONG=regenerate
 OPTS=$(getopt -a -n dockovpn --options $SHORT --longoptions $LONG -- "$@")
 
 if [[ $? -ne 0 ]] ; then
@@ -13,10 +13,6 @@ eval set -- "$OPTS"
 while :
 do
   case "$1" in
-    -c | --client )
-      CLIENT_OPTS="$2"
-      shift 2;
-      ;;
     -r | --regenerate)
       REGENERATE="1"
       shift;
@@ -31,8 +27,6 @@ do
       ;;
   esac
 done
-
-echo "Rest arguments: $@"
 
 ADAPTER="${NET_ADAPTER:=eth0}"
 source ./functions.sh
@@ -67,8 +61,13 @@ LOCKFILE=.gen
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
 
-    easyrsa init-pki
-    easyrsa gen-dh
+    if [[ -n $REGENERATE ]]; then
+        easyrsa --batch init-pki
+        easyrsa --batch gen-dh
+        # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+        # Copy DH file
+        cp pki/dh.pem /etc/openvpn
+    fi
 
     easyrsa build-ca nopass << EOF
 
@@ -114,7 +113,7 @@ if [[ -n $IS_INITIAL ]]; then
     echo " "
 
     # Generate client config
-    ./genclient.sh $CLIENT_OPTS
+    ./genclient.sh $@
 fi
 
 tail -f /dev/null
