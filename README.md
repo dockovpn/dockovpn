@@ -3,6 +3,7 @@
 <p align="center">
 <a href="https://github.com/alekslitvinenk/docker-openvpn/blob/master/README.md">[English]</a>
 <a href="https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/README_RU.md">[Русский]</a>
+<a href="https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/README_CN.md">[中国人]</a>
 <br>
 
 ![Build Version](http://cicd.dockovpn.io/version/dockovpn)
