@@ -28,6 +28,12 @@ do
   esac
 done
 
+if [[ -n $HOST_ADDR ]]; then
+    export HOST_ADDR_INT=$HOST_ADDR
+else
+    export HOST_ADDR_INT=$(curl -s https://ip.dockovpn.io)
+fi
+
 ADAPTER="${NET_ADAPTER:=eth0}"
 source ./functions.sh
 

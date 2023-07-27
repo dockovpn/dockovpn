@@ -24,7 +24,7 @@ function createConfig() {
     cd "$APP_INSTALL_PATH"
     cp config/client.ovpn $CLIENT_PATH
 
-    echo -e "\nremote $HOST_ADDR $HOST_TUN_PORT" >> "$CLIENT_PATH/client.ovpn"
+    echo -e "\nremote $HOST_ADDR_INT $HOST_TUN_PORT" >> "$CLIENT_PATH/client.ovpn"
 
     # Embed client authentication files into config file
     cat <(echo -e '<ca>') \
