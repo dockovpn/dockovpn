@@ -1,4 +1,4 @@
-FROM alpine:3.14.1
+FROM alpine:3.16.1
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
@@ -19,7 +19,7 @@ COPY scripts .
 COPY config ./config
 COPY VERSION ./config
 
-RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
+RUN apk add --no-cache iptables ipcalc openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
     mkdir -p ${APP_PERSIST_DIR} && \
     # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
