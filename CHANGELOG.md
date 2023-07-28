@@ -1,5 +1,13 @@
 # Change log
 
+## v1.10.0
+
+- Add content table to README
+- Add container option -r | --regenerate to create PKI and DH at runtime
+- Adds posibility to generate PKI and DH when container starts
+- Adds Chineese translation
+- Fixes volume name for docker-compose
+
 ## v1.9.0
 
 - Adds possibility to customise HTTP and tunnel port (Issue #170)
