@@ -1,5 +1,33 @@
 #!/bin/bash
 
+SHORT=r
+LONG=regenerate
+OPTS=$(getopt -a -n dockovpn --options $SHORT --longoptions $LONG -- "$@")
+
+if [[ $? -ne 0 ]] ; then
+    exit 1
+fi
+
+eval set -- "$OPTS"
+
+while :
+do
+  case "$1" in
+    -r | --regenerate)
+      REGENERATE="1"
+      shift;
+      ;;
+    --)
+      shift;
+      break
+      ;;
+    *)
+      echo "Unexpected option: $1"
+      exit 1
+      ;;
+  esac
+done
+
 ADAPTER="${NET_ADAPTER:=eth0}"
 source ./functions.sh
 
@@ -33,8 +61,13 @@ LOCKFILE=.gen
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
 
-    easyrsa init-pki
-    easyrsa gen-dh
+    if [[ -n $REGENERATE ]]; then
+        easyrsa --batch init-pki
+        easyrsa --batch gen-dh
+        # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+        # Copy DH file
+        cp pki/dh.pem /etc/openvpn
+    fi
 
     easyrsa build-ca nopass << EOF
 

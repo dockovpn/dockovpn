@@ -95,6 +95,21 @@ docker run -it --rm --cap-add=NET_ADMIN \
 --name dockovpn alekslitvinenk/openvpn
 ```
 
+### Container options
+
+| Short name | Long name | Description |
+| :-: | :---: | :-----: |
+| `-r` | `--regenerate` | Regenerates PKI and DH file |
+
+**⚠️ Note:** We strongly recommend always run your container with `-r` option, even though it will take container a bit longer to start. In future releases we will apply this option by default:
+
+```bash
+docker run -it --rm --cap-add=NET_ADMIN \
+-p 1194:1194/udp -p 80:8080/tcp \
+-e HOST_ADDR=$(curl -s https://api.ipify.org) \
+--name dockovpn alekslitvinenk/openvpn -r
+```
+
 ### Container commands
 
 After container was run using `docker run` command, it's possible to execute additional commands using `docker exec` command. For example, `docker exec <container id> ./version.sh`. See table below to get the full list of supported commands.
