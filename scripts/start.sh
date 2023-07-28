@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./functions.sh
 
 SHORT=r
 LONG=regenerate
@@ -35,7 +36,6 @@ else
 fi
 
 ADAPTER="${NET_ADAPTER:=eth0}"
-source ./functions.sh
 
 mkdir -p /dev/net
 
