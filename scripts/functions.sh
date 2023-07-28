@@ -82,3 +82,9 @@ EOF
 
     cd "$APP_INSTALL_PATH"
 }
+
+function getVersion() {
+    local app_version="$APP_NAME $(cat $APP_INSTALL_PATH/config/VERSION)"
+
+    echo "$app_version"
+}

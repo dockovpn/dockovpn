@@ -31,7 +31,7 @@ done
 if [[ -n $HOST_ADDR ]]; then
     export HOST_ADDR_INT=$HOST_ADDR
 else
-    export HOST_ADDR_INT=$(curl -s https://ip.dockovpn.io)
+    export HOST_ADDR_INT=$(curl -s -H "X-DockoVPN-Version: $(getVersion)" https://ip.dockovpn.io)
 fi
 
 ADAPTER="${NET_ADAPTER:=eth0}"
