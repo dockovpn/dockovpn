@@ -13,7 +13,6 @@
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
 
@@ -81,7 +80,6 @@ DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
 docker run -it --rm --cap-add=NET_ADMIN \
 -p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
 --name dockovpn alekslitvinenk/openvpnHOST_TUN_PORT
@@ -117,7 +115,6 @@ docker run -it --rm --cap-add=NET_ADMIN \
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
 
@@ -170,7 +167,6 @@ Sun Jun  9 09:01:15 2019 Config http server has been shut down
 
 
 ```bash
-echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
 docker-compose up -d && \
 docker-compose exec -d dockovpn wget -O /doc/Dockovpn/client.ovpn localhost:8080
 ```
