@@ -1,5 +1,11 @@
 # Change log
 
+## v1.11.0
+
+- Add internal IP reolution mechanism
+- Improve scripts logic
+- Cosmetic docs improvements
+
 ## v1.10.0
 
 - Add content table to README
