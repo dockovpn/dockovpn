@@ -29,12 +29,10 @@ do
   esac
 done
 
-RESOLVED_HOST_ADDR=$(curl -s -H "X-DockoVPN-Version: $(getVersion)" https://ip.dockovpn.io)
-
-if [[ -n $HOST_ADDR_OVERRIDE ]]; then
-    export HOST_ADDR_INT=$HOST_ADDR_OVERRIDE
+if [[ -n $HOST_ADDR ]]; then
+    export HOST_ADDR_INT=$HOST_ADDR
 else
-    export HOST_ADDR_INT=$RESOLVED_HOST_ADDR
+    export HOST_ADDR_INT=$(curl -s -H "X-DockoVPN-Version: $(getVersion)" https://ip.dockovpn.io)
 fi
 
 ADAPTER="${NET_ADAPTER:=eth0}"
