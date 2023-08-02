@@ -168,7 +168,6 @@ Sun Jun  9 09:01:15 2019 Config http server has been shut down
 
 要使用 docker-compose 运行 dockvpn，执行以下操作：
 
-
 ```bash
 echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
 docker-compose up -d && \

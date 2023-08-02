@@ -76,12 +76,12 @@ To get more detailed information, go to [Quick Start](#-quick-start) tutorial or
 | Variable | Description | Default value |
 | :------: | :---------: | :-----------: |
 | NET_ADAPTER | Network adapter to use on the host machine | eth0 |
-| HOST_ADDR | Host address to advertise in the client config file | localhost |
+| HOST_ADDR | Host address override if the resolved address doesn't work | localhost |
 | HOST_TUN_PORT | Tunnel port to advertise in the client config file | 1194 |
 | HOST_CONF_PORT | HTTP port on the host machine to download the client config file | 80 |
 
 **⚠️ Note:** In the provided code snippet we advertise the configuration suitable for the most users. We don't recommend setting custom 
-NET_ADAPTER and HOST_ADDR unless you absolutely have to. HOST_ADDR is determined automatically by running shell subcommand `$(curl -s https://api.ipify.org)`.
+NET_ADAPTER and HOST_ADDR unless you absolutely have to. Now host address is resolved automatically when container starts..
 More often you'd like to customize HOST_TUN_PORT and HOST_CONF_PORT. If this is the case, use the snippet below (dont forget to replace `<custom port>` with your values):
 
 ```shell
