@@ -22,7 +22,6 @@
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
 Чтобы получить более детальную информацию, перейдите к [Быстрый старт](#-быстрый-старт) или посмотрите [видео](https://youtu.be/A8zvrHsT9A0).
@@ -48,11 +47,11 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | Переменная | Описание | Значение по умолчанию |
 | :------: | :---------: | :-----------: |
 | NET_ADAPTER | Сетевой адаптер для использования на серверной машине | eth0 |
-| HOST_ADDR | Адрес сервера, который будет использоваться в клиентском файле конфигурации | localhost |
+| HOST_ADDR_OVERRIDE | Переопределенный адрес сервера (если автоматически определенный не работает), который будет использоваться в клиентском файле конфигурации |  |
 | HOST_TUN_PORT | Порт на сервере для передачи  VPN данных | 1194 |
 | HOST_CONF_PORT | HTTP порт на сервере для скачивания клиентского файла конфигурации | 80 |
 
-**⚠️ Note:** В предоставленном фрагменте кода, мы используем конфигурацию, которая подойдет большинству пользователей. Мы не рекоммендуем менять NET_ADAPTER и HOST_ADDR на свои настройки если это абсолютно необходимо. HOST_ADDR определяется автоматически с помощью запуска подкомманды `$(curl -s https://api.ipify.org)`.
+**⚠️ Note:** В предоставленном фрагменте кода, мы используем конфигурацию, которая подойдет большинству пользователей. Мы не рекоммендуем менять NET_ADAPTER и HOST_ADDR_OVERRIDE на свои настройки если это абсолютно необходимо. Адрес хоста определяется автоматически.
 В отдельных случаях может потребоваться использовать порты отличные от тех, которые используются по умолчанию. Если это такой случай, используйте фрагмент кода ниже предварительно заменив `<custom port>` на нужные вам значения:
 
 ```shell
@@ -60,7 +59,6 @@ DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
 docker run -it --rm --cap-add=NET_ADMIN \
 -p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
 --name dockovpn alekslitvinenk/openvpn
@@ -90,7 +88,6 @@ docker run -it --rm --cap-add=NET_ADMIN \
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
 **⚠️ Note:** Приведенный выше код запустит Dockovpn в присоединенном режиме и если вы закроете окно ssh сессии, то контейнер будет остановлен. Чтобы избежать этого, необходимо сначала отвязать контейнер от ssh сессии, для этого наберите `Ctrl+P Ctrl+Q`.
@@ -130,7 +127,6 @@ Sun Jun  9 09:01:15 2019 Config http server has been shut down
 
 Для того чтобы запустить docker-openvpn с помощью docker-compose, выполните:
 ```bash
-echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
 docker-compose up -d && \
 docker-compose exec -d dockovpn wget -O /doc/Dockovpn/client.ovpn localhost:8080
 ```
