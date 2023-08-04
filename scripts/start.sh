@@ -103,7 +103,7 @@ cp pki/dh.pem pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem 
 cd "$APP_INSTALL_PATH"
 
 # Print app version
-$APP_INSTALL_PATH/version.sh
+getVersionFull
 
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
