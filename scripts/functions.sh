@@ -84,7 +84,15 @@ EOF
 }
 
 function getVersion() {
-    local app_version="$APP_NAME $(cat $APP_INSTALL_PATH/config/VERSION)"
+    local app_version="$APP_NAME $(cat $APP_INSTALL_PATH/config/VERSION) $0"
 
     echo "$app_version"
 }
+
+RESOLVED_HOST_ADDR=$(curl -s -H "X-DockoVPN-Version: $(getVersion)" https://ip.dockovpn.io)
+
+if [[ -n $HOST_ADDR ]]; then
+    export HOST_ADDR_INT=$HOST_ADDR
+else
+    export HOST_ADDR_INT=$RESOLVED_HOST_ADDR
+fi
