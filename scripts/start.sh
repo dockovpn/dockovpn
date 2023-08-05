@@ -113,7 +113,7 @@ if [[ -n $IS_INITIAL ]]; then
     echo " "
 
     # Generate client config
-    ./genclient.sh $@
+    generateClientConfig $@
 fi
 
 tail -f /dev/null
