@@ -29,14 +29,6 @@ do
   esac
 done
 
-RESOLVED_HOST_ADDR=$(curl -s -H "X-DockoVPN-Version: $(getVersion)" https://ip.dockovpn.io)
-
-if [[ -n $HOST_ADDR ]]; then
-    export HOST_ADDR_INT=$HOST_ADDR
-else
-    export HOST_ADDR_INT=$RESOLVED_HOST_ADDR
-fi
-
 ADAPTER="${NET_ADAPTER:=eth0}"
 
 mkdir -p /dev/net
@@ -111,7 +103,7 @@ cp pki/dh.pem pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem 
 cd "$APP_INSTALL_PATH"
 
 # Print app version
-$APP_INSTALL_PATH/version.sh
+getVersionFull
 
 # Need to feed key password
 openvpn --config /etc/openvpn/server.conf &
@@ -121,7 +113,7 @@ if [[ -n $IS_INITIAL ]]; then
     echo " "
 
     # Generate client config
-    ./genclient.sh $@
+    generateClientConfig $@
 fi
 
 tail -f /dev/null

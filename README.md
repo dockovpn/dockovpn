@@ -22,7 +22,6 @@ Out of the box stateless VPN server docker image which starts in just a few seco
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
 
@@ -89,7 +88,6 @@ DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
 docker run -it --rm --cap-add=NET_ADMIN \
 -p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
 --name dockovpn alekslitvinenk/openvpn
@@ -106,7 +104,6 @@ docker run -it --rm --cap-add=NET_ADMIN \
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn -r
 ```
 
@@ -139,7 +136,6 @@ Copy & paste the following command to run docker-openvpn:<br>
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
 -p 1194:1194/udp -p 80:8080/tcp \
--e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
 
@@ -187,7 +183,6 @@ Sometimes it is more convenient to use [docker-compose](https://docs.docker.com/
 To run dockvpn with docker-compose run:
 
 ```bash
-echo HOST_ADDR=$(curl -s https://api.ipify.org) > .env && \
 docker-compose up -d && \
 docker-compose exec -d dockovpn wget -O /doc/Dockovpn/client.ovpn localhost:8080
 ```
