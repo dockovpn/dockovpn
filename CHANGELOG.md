@@ -1,5 +1,9 @@
 # Change log
 
+## v1.11.1
+
+- Patches genclient URL issue
+
 ## v1.11.0
 
 - Add internal IP reolution mechanism
