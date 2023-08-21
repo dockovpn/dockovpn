@@ -53,7 +53,7 @@ clean:
 test:
 	@echo "Running tests for DockOvpn ${FULL_VERSION}"
 	@echo "Test reports will be saved in ${TESTS_FOLDER}"
-	docker pull alekslitvinenk/dockovpn-it:1.0.0
+	docker pull alekslitvinenk/dockovpn-it:1.1.0
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
@@ -63,14 +63,14 @@ test:
 	--network host \
 	--name dockovpn-it \
 	--rm \
-	alekslitvinenk/dockovpn-it:1.0.0 test
+	alekslitvinenk/dockovpn-it:1.1.0 test
 
 # https://github.com/dockovpn/dockovpn-it
 # For testing locally on macOS or Windows (where DockerDesktop is running)
 test-branch:
 	@echo "Running tests for DockOvpn ${CBRANCH}"
 	@echo "Test reports will be saved in ${TESTS_FOLDER}"
-	docker pull alekslitvinenk/dockovpn-it:1.0.0
+	docker pull alekslitvinenk/dockovpn-it:1.1.0
 	docker run \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v ${TESTS_FOLDER}:/target/test-reports \
@@ -81,7 +81,7 @@ test-branch:
 	--network host \
 	--name dockovpn-it \
 	--rm \
-	alekslitvinenk/dockovpn-it:1.0.0 test
+	alekslitvinenk/dockovpn-it:1.1.0 test
 
 run:
 	docker run --cap-add=NET_ADMIN \
