@@ -38,6 +38,8 @@ build-test:
 build-branch:
 	@echo "Making build for branch: ${DOCKER_REPO}:${CBRANCH}"
 	docker build -t "${DOCKER_REPO}:${CBRANCH}" --no-cache --progress plain .
+
+publish-branch: build-branch
 	docker push "${DOCKER_REPO}:${CBRANCH}"
 
 install:

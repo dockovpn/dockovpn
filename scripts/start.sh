@@ -1,8 +1,8 @@
 #!/bin/bash
 source ./functions.sh
 
-SHORT=rn
-LONG="regenerate,noop"
+SHORT=rnq
+LONG="regenerate,noop,quit"
 OPTS=$(getopt -a -n dockovpn --options $SHORT --longoptions $LONG -- "$@")
 
 if [[ $? -ne 0 ]] ; then
@@ -20,6 +20,10 @@ do
       ;;
     -n | --noop)
       NOOP="1"
+      shift;
+      ;;
+    -q | --quit)
+      QUIT="1"
       shift;
       ;;
     --)
@@ -122,4 +126,6 @@ if ! [[ -n $NOOP ]]; then
     fi
 fi
 
-tail -f /dev/null
+if ! [[ -n $QUIT ]]; then
+    tail -f /dev/null
+fi
