@@ -1,5 +1,9 @@
 # Change log
 
+## v1.11.2
+
+- Update test runner to version 1.1.0
+
 ## v1.11.1
 
 - Patches genclient URL issue
