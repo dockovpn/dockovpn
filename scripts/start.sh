@@ -1,8 +1,8 @@
 #!/bin/bash
 source ./functions.sh
 
-SHORT=r
-LONG=regenerate
+SHORT=rnq
+LONG="regenerate,noop,quit"
 OPTS=$(getopt -a -n dockovpn --options $SHORT --longoptions $LONG -- "$@")
 
 if [[ $? -ne 0 ]] ; then
@@ -16,6 +16,14 @@ do
   case "$1" in
     -r | --regenerate)
       REGENERATE="1"
+      shift;
+      ;;
+    -n | --noop)
+      NOOP="1"
+      shift;
+      ;;
+    -q | --quit)
+      QUIT="1"
       shift;
       ;;
     --)
@@ -105,15 +113,19 @@ cd "$APP_INSTALL_PATH"
 # Print app version
 getVersionFull
 
-# Need to feed key password
-openvpn --config /etc/openvpn/server.conf &
+if ! [[ -n $NOOP ]]; then
+    # Need to feed key password
+    openvpn --config /etc/openvpn/server.conf &
 
-if [[ -n $IS_INITIAL ]]; then
-    # By some strange reason we need to do echo command to get to the next command
-    echo " "
+    if [[ -n $IS_INITIAL ]]; then
+        # By some strange reason we need to do echo command to get to the next command
+        echo " "
 
-    # Generate client config
-    generateClientConfig $@
+        # Generate client config
+        generateClientConfig $@
+    fi
 fi
 
-tail -f /dev/null
+if ! [[ -n $QUIT ]]; then
+    tail -f /dev/null
+fi
