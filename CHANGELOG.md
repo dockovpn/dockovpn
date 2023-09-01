@@ -1,5 +1,10 @@
 # Change log
 
+## v1.12.0
+
+- Add --noop option
+- Add --quit option
+
 ## v1.11.2
 
 - Update test runner to version 1.1.0
