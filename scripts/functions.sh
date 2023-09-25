@@ -8,7 +8,7 @@ function datef() {
 
 function createConfig() {
     cd "$APP_PERSIST_DIR"
-    CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+
     CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
 
     # Redirect stderr to the black hole
@@ -94,7 +94,15 @@ function getVersionFull() {
 }
 
 function generateClientConfig() {
-    CLIENT_PATH="$(createConfig)"
+    #if first argument is n and second is not empty use it as CLIENT_ID
+    #else generate random CLIENT_ID
+    if [ "$1" == "n" ] && [ -n "$2" ]; then
+        CLIENT_ID="$2"
+    else
+        CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+    fi
+
+    CLIENT_PATH=$(createConfig)
     CONTENT_TYPE=application/text
     FILE_NAME=client.ovpn
     FILE_PATH="$CLIENT_PATH/$FILE_NAME"
@@ -129,7 +137,7 @@ function generateClientConfig() {
                     FILE_PATH="$CLIENT_PATH/$FILE_NAME"
                 fi
                 ;;
-            o)
+            o|n)
                     cat "$FILE_PATH"
                     exit 0
                 ;;
