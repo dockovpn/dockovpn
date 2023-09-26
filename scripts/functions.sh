@@ -9,10 +9,14 @@ function datef() {
 function createConfig() {
     cd "$APP_PERSIST_DIR"
 
-    CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
-
     # Redirect stderr to the black hole
-    easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+
+    if [ "$PASSWORD_PROTECTED" -eq 1 ]; then
+        easyrsa build-client-full "$CLIENT_ID"
+    else
+        easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+    fi
+
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
     # Client sertificate /usr/share/easy-rsa/pki/issued/client.crt
     # CA is by the path /usr/share/easy-rsa/pki/ca.crt
@@ -94,15 +98,26 @@ function getVersionFull() {
 }
 
 function generateClientConfig() {
-    #if first argument is n and second is not empty use it as CLIENT_ID
-    #else generate random CLIENT_ID
-    if [ "$1" == "n" ] && [ -n "$2" ]; then
-        CLIENT_ID="$2"
-    else
-        CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
-    fi
+    #case
+    #first argument  = n  use second argument as CLIENT_ID
+    #first argument = np use second argument as CLIENT_ID and set PASSWORD_PROTECTED as 1
+    #default generate random CLIENT_ID
+    FLAGS=$1
+    case $FLAGS in
+        n)
+            CLIENT_ID="$2"
+            ;;
+        np)
+            CLIENT_ID="$2"
+            PASSWORD_PROTECTED=1
+            ;;
+        *)
+            CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
+            ;;
+    esac
 
-    CLIENT_PATH=$(createConfig)
+    CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
+    createConfig
     CONTENT_TYPE=application/text
     FILE_NAME=client.ovpn
     FILE_PATH="$CLIENT_PATH/$FILE_NAME"
@@ -137,7 +152,7 @@ function generateClientConfig() {
                     FILE_PATH="$CLIENT_PATH/$FILE_NAME"
                 fi
                 ;;
-            o|n)
+            o|n|np)
                     cat "$FILE_PATH"
                     exit 0
                 ;;
