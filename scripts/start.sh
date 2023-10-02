@@ -69,13 +69,11 @@ LOCKFILE=.gen
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
 
-    if [[ -n $REGENERATE ]]; then
-        easyrsa --batch init-pki
-        easyrsa --batch gen-dh
-        # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
-        # Copy DH file
-        cp pki/dh.pem /etc/openvpn
-    fi
+    easyrsa --batch init-pki
+    easyrsa --batch gen-dh
+    # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+    # Copy DH file
+    cp pki/dh.pem /etc/openvpn
 
     easyrsa build-ca nopass << EOF
 
@@ -117,13 +115,6 @@ if ! [[ -n $NOOP ]]; then
     # Need to feed key password
     openvpn --config /etc/openvpn/server.conf &
 
-    if [[ -n $IS_INITIAL ]]; then
-        # By some strange reason we need to do echo command to get to the next command
-        echo " "
-
-        # Generate client config
-        generateClientConfig $@
-    fi
 fi
 
 if ! [[ -n $QUIT ]]; then
