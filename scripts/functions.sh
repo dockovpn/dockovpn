@@ -117,7 +117,14 @@ function generateClientConfig() {
     esac
 
     CLIENT_PATH="$APP_PERSIST_DIR/clients/$CLIENT_ID"
-    createConfig
+
+    if [ -d $CLIENT_PATH ]; then
+        echo "$(datef) Client with this id [$CLIENT_ID] already exists"
+        exit 1
+    else     
+        createConfig
+    fi
+
     CONTENT_TYPE=application/text
     FILE_NAME=client.ovpn
     FILE_PATH="$CLIENT_PATH/$FILE_NAME"

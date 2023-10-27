@@ -122,7 +122,9 @@ if ! [[ -n $NOOP ]]; then
         echo " "
 
         # Generate client config
-        generateClientConfig $@
+        generateClientConfig $@ &
+    else
+      echo "$(datef) Data exist: skipping client generation"
     fi
 fi
 
