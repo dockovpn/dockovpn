@@ -2,4 +2,4 @@
 
 source ./functions.sh
 
-generateClientConfig
+generateClientConfig "$@"

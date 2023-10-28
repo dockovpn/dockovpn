@@ -1,8 +1,8 @@
 #!/bin/bash
 source ./functions.sh
 
-SHORT=rnq
-LONG="regenerate,noop,quit"
+SHORT=rnqs
+LONG="regenerate,noop,quit,skip"
 OPTS=$(getopt -a -n dockovpn --options $SHORT --longoptions $LONG -- "$@")
 
 if [[ $? -ne 0 ]] ; then
@@ -24,6 +24,10 @@ do
       ;;
     -q | --quit)
       QUIT="1"
+      shift;
+      ;;
+    -s | --skip)
+      SKIP="1"
       shift;
       ;;
     --)
@@ -121,8 +125,14 @@ if ! [[ -n $NOOP ]]; then
         # By some strange reason we need to do echo command to get to the next command
         echo " "
 
-        # Generate client config
-        generateClientConfig $@
+        if ! [[ -n $SKIP ]]; then
+          # Generate client config
+          generateClientConfig $@ &
+        else
+          echo "$(datef) SKIP is set: skipping client generation"
+        fi
+    else
+      echo "$(datef) Data exist: skipping client generation"
     fi
 fi
 
