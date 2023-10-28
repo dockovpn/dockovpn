@@ -100,6 +100,7 @@ docker run -it --rm --cap-add=NET_ADMIN \
 | `-r` | `--regenerate` | Regenerates PKI and DH file |
 | `-n` | `--noop` | Initialise container, but don's start VPN server |
 | `-q` | `--quit` | Quit after container was initialized |
+| `-s` | `--skip` | Skip client generation on first start |
 
 **⚠️ Note:** We strongly recommend always run your container with `-r` option, even though it will take container a bit longer to start. In future releases we will apply this option by default:
 
