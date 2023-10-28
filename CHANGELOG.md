@@ -1,5 +1,12 @@
 # Change log
 
+## v1.13.0
+
+- Add --skip option to omit client generation on first launch
+- Add error message on attempt to generate config with client id that already exists in server
+- Add support for generation of named configs with password protection (by @gonzalo)
+- Fix issues with passing args to genclient.sh script (by @gonzalo)
+
 ## v1.12.0
 
 - Add --noop option
