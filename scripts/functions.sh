@@ -40,8 +40,6 @@ function createConfig() {
 
     # Append client id info to the config
     echo ";client-id $CLIENT_ID" >> "$CLIENT_PATH/client.ovpn"
-
-    echo $CLIENT_PATH
 }
 
 function zipFiles() {
@@ -111,7 +109,7 @@ function getConfig() {
 function generateClientConfig() {
     #case
     #first argument  = n  use second argument as CLIENT_ID
-    #first argument = np use second argument as CLIENT_ID and set PASSWORD_PROTECTED as 1
+    #first argument = np use second argument as CLIENT_ID and set PASSWORD_PROTECTED as yes
     #default generate random CLIENT_ID
     FLAGS=$1
     case $FLAGS in
@@ -120,7 +118,7 @@ function generateClientConfig() {
             ;;
         np)
             CLIENT_ID="$2"
-            PASSWORD_PROTECTED=1
+            PASSWORD_PROTECTED="yes"
             ;;
         *)
             CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
