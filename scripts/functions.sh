@@ -97,6 +97,17 @@ function getVersionFull() {
     echo "$(datef) $(getVersion)"
 }
 
+function listConfigs() {
+    cd "$APP_PERSIST_DIR/clients"
+    ls -1
+}
+
+function getConfig() {
+    local CLIENT_ID="$1"
+
+    cat "$APP_PERSIST_DIR/clients/$CLIENT_ID/client.ovpn"
+}
+
 function generateClientConfig() {
     #case
     #first argument  = n  use second argument as CLIENT_ID
