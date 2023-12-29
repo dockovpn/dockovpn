@@ -42,6 +42,9 @@ do
 done
 
 ADAPTER="${NET_ADAPTER:=eth0}"
+TUN_PORT=${HOST_TUN_PORT:-1194}
+TUN_PROTO="${HOST_TUN_PROTO:-udp}"
+IP_NET="${OVPN_IP_NET:-10.8.0.0/24}"
 
 mkdir -p /dev/net
 
@@ -50,20 +53,20 @@ if [ ! -c /dev/net/tun ]; then
     mknod /dev/net/tun c 10 200
 fi
 
-# Allow UDP traffic on port 1194.
-iptables -A INPUT -i $ADAPTER -p udp -m state --state NEW,ESTABLISHED --dport 1194 -j ACCEPT
-iptables -A OUTPUT -o $ADAPTER -p udp -m state --state ESTABLISHED --sport 1194 -j ACCEPT
+# Allow UDP traffic on port 1194 or set environment variables HOST_TUN_PROTO and HOST_TUN_PORT.
+iptables -A INPUT -i $ADAPTER -p $TUN_PROTO -m state --state NEW,ESTABLISHED --dport $TUN_PORT -j ACCEPT
+iptables -A OUTPUT -o $ADAPTER -p $TUN_PROTO -m state --state ESTABLISHED --sport $TUN_PORT -j ACCEPT
 
 # Allow traffic on the TUN interface.
 iptables -A INPUT -i tun0 -j ACCEPT
 iptables -A FORWARD -i tun0 -j ACCEPT
 iptables -A OUTPUT -o tun0 -j ACCEPT
 
-# Allow forwarding traffic only from the VPN.
-iptables -A FORWARD -i tun0 -o $ADAPTER -s 10.8.0.0/24 -j ACCEPT
+# Allow forwarding traffic only from the VPN (set environment variables OVPN_IP_NET).
+iptables -A FORWARD -i tun0 -o $ADAPTER -s $IP_NET -j ACCEPT
 iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o $ADAPTER -j MASQUERADE
+iptables -t nat -A POSTROUTING -s $IP_NET -o $ADAPTER -j MASQUERADE
 
 cd "$APP_PERSIST_DIR"
 
