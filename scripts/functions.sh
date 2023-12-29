@@ -11,7 +11,7 @@ function createConfig() {
 
     # Redirect stderr to the black hole
 
-    if [ "$PASSWORD_PROTECTED" -eq 1 ]; then
+    if [ $PASSWORD_PROTECTED -eq 1 ]; then
         easyrsa build-client-full "$CLIENT_ID"
     else
         easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
@@ -121,7 +121,7 @@ function generateClientConfig() {
     if [ -d $CLIENT_PATH ]; then
         echo "$(datef) Client with this id [$CLIENT_ID] already exists"
         exit 1
-    else     
+    else
         createConfig
     fi
 
