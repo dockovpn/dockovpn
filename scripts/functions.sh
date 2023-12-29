@@ -11,10 +11,10 @@ function createConfig() {
 
     # Redirect stderr to the black hole
 
-    if [ $PASSWORD_PROTECTED -eq 1 ]; then
-        easyrsa build-client-full "$CLIENT_ID"
+    if [ "${PASSWORD_PROTECTED:-0}" -eq 1 ]; then
+        yes "yes" | easyrsa build-client-full "$CLIENT_ID"
     else
-        easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+        yes "yes" | easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
     fi
 
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
