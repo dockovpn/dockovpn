@@ -199,10 +199,10 @@ function generateClientConfig() {
     echo "$(datef) Config http server has been shut down"
 }
 
-RESOLVED_HOST_ADDR=$(curl -s -H "X-DockoVPN-Version: $(getVersion) $0" https://ip.dockovpn.io)
 
 if [[ -n $HOST_ADDR ]]; then
     export HOST_ADDR_INT=$HOST_ADDR
 else
+    RESOLVED_HOST_ADDR=$(curl -s -H "X-DockoVPN-Version: $(getVersion) $0" https://ip.dockovpn.io)
     export HOST_ADDR_INT=$RESOLVED_HOST_ADDR
 fi

@@ -69,7 +69,7 @@ cd "$APP_PERSIST_DIR"
 
 LOCKFILE=.gen
 
-# Regenerate certs only on the first start 
+# Regenerate certs only on the first start
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
 
@@ -100,7 +100,7 @@ yes
 EOF3
     # Certificate created at: /opt/Dockovpn_data/pki/issued/MyReq.crt
 
-    openvpn --genkey --secret ta.key << EOF4
+    openvpn --genkey secret ta.key << EOF4
 yes
 EOF4
 
