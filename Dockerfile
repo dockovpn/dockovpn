@@ -13,6 +13,8 @@ ENV HOST_ADDR ""
 ENV HOST_TUN_PORT 1194
 ENV HOST_CONF_PORT 80
 
+ARG SKIP_INIT
+
 WORKDIR ${APP_INSTALL_PATH}
 
 COPY scripts .
@@ -22,12 +24,14 @@ COPY VERSION ./config
 RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
     mkdir -p ${APP_PERSIST_DIR} && \
-    cd ${APP_PERSIST_DIR} && \
-    easyrsa init-pki && \
-    easyrsa gen-dh && \
-    # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
-    # Copy DH file
-    cp pki/dh.pem /etc/openvpn && \
+    if [ "$SKIP_INIT" != "true" ]; then \
+        cd ${APP_PERSIST_DIR} && \
+        easyrsa init-pki && \
+        # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+        # Copy DH file
+        easyrsa gen-dh && \
+        cp pki/dh.pem /etc/openvpn; \
+    fi &&
     # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
     cd ${APP_INSTALL_PATH} && \
     cp config/server.conf /etc/openvpn/server.conf
