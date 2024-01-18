@@ -72,7 +72,7 @@ LOCKFILE=.gen
 # Regenerate certs only on the first start 
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
-
+    test -d pki || REGENERATE="1"
     if [[ -n $REGENERATE ]]; then
         easyrsa --batch init-pki
         easyrsa --batch gen-dh
