@@ -27,6 +27,13 @@ docker run -it --rm --cap-add=NET_ADMIN \
 
 To get more detailed information, go to [Quick Start](#-quick-start) tutorial or watch [video](https://youtu.be/y5Dwakc6hMs).
 
+## Supporting Dockovpn
+
+Dockovpn is a team of cybersecurity experts developing leading edge projects in Networking, VPN, DevOPS and SecOPS domains. Project is supported entirely by volonteers.
+If you'd like to help support the future of the project, please consider:
+- Giving developer time (see [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md))!
+- Giving funds by becoming a sponsor on [GitHub](https://github.com/sponsors/dockovpn)!
+
 ## Content
 
 [Resources](#resources) \
