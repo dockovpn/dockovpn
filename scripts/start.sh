@@ -68,9 +68,17 @@ iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o $ADAPTER -j MASQUERADE
 cd "$APP_PERSIST_DIR"
 
 LOCKFILE=.gen
+KEYS_AND_CERTS="pki/dh.pem pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem ta.key"
+# if there is no at least one key or cert file then regenerate all
+for FILE in $KEYS_AND_CERTS; do
+    if ! [[ -f $FILE ]]; then
+        REGENERATE="1"
+        break
+    fi
+done
 
-# Regenerate certs only on the first start 
-if [ ! -f $LOCKFILE ]; then
+# Regenerate certs the first start or if REGENERATE is set
+if [[ ! -f $LOCKFILE || -n $REGENERATE ]]; then
     IS_INITIAL="1"
     test -d pki || REGENERATE="1"
     if [[ -n $REGENERATE ]]; then
@@ -110,7 +118,7 @@ EOF4
 fi
 
 # Copy server keys and certificates
-cp pki/dh.pem pki/ca.crt pki/issued/MyReq.crt pki/private/MyReq.key pki/crl.pem ta.key /etc/openvpn
+cp $KEYS_AND_CERTS /etc/openvpn
 
 cd "$APP_INSTALL_PATH"
 
