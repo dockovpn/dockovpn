@@ -71,18 +71,21 @@ docker run -it --rm --cap-add=NET_ADMIN \
 | NET_ADAPTER | 主机上要使用的网络适配器 | eth0 |
 | HOST_ADDR | 在客户端配置文件中广告的主机地址 | localhost |
 | HOST_TUN_PORT | 在客户端配置文件中广告的隧道端口 | 1194 |
+| HOST_TUN_PROTOCOL |                   隧道协议 (`tcp` 或 `udp`)             |      udp      |
 | HOST_CONF_PORT | 用于下载客户端配置文件的主机上的HTTP端口 | 80 |
 
-**⚠️ 注意：** 在提供的代码片段中，我们会广告适用于大多数用户的配置。我们不建议设置自定义 NET_ADAPTER 和 HOST_ADDR，除非您确实必须这样做。HOST_ADDR 会通过运行 shell 子命令`$(curl -s https://api.ipify.org)`自动确定。更常见的情况是，您可能想自定义 HOST_TUN_PORT 和 HOST_CONF_PORT。如果是这种情况，请使用下面的代码片段（不要忘记用您的值替换`<custom port>`）：
+**⚠️ 注意：** 在提供的代码片段中，我们会广告适用于大多数用户的配置。我们不建议设置自定义 NET_ADAPTER 和 HOST_ADDR，除非您确实必须这样做。HOST_ADDR 会通过运行 shell 子命令`$(curl -s https://api.ipify.org)`自动确定。更常见的情况是，您可能想自定义 HOST_TUN_PORT、HOST_CONF_PORT 或 HOST_TUN_PROTOCOL。如果是这种情况，请使用下面的代码片段（不要忘记用您的值替换`<custom port>` 或 `<custom protocol>`）：
 
 ```shell
 DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
+DOCKOVPN_TUNNEL_PROTOCOL=<custom protocol>
 docker run -it --rm --cap-add=NET_ADMIN \
--p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
+-p $DOCKOVPN_TUNNEL_PORT:1194/$DOCKOVPN_TUNNEL_PROTOCOL -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
---name dockovpn alekslitvinenk/openvpnHOST_TUN_PORT
+-e HOST_TUN_PROTOCOL="$DOCKOVPN_TUNNEL_PROTOCOL" \
+--name dockovpn alekslitvinenk/openvpn
 ```
 
 

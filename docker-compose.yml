@@ -8,7 +8,7 @@ services:
     cap_add:
         - NET_ADMIN
     ports:
-        - 1194:1194/udp
+        - 1194:1194/udp # Expose tcp if you defined HOST_TUN_PROTOCOL=tcp
     environment:
         HOST_ADDR: ${HOST_ADDR} 
     volumes:

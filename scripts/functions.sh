@@ -27,6 +27,7 @@ function createConfig() {
 
     cd "$APP_INSTALL_PATH"
     cp config/client.ovpn $CLIENT_PATH
+    sed -i 's/%HOST_TUN_PROTOCOL%/'"$HOST_TUN_PROTOCOL"'/g' $CLIENT_PATH/client.ovpn
 
     echo -e "\nremote $HOST_ADDR_INT $HOST_TUN_PORT" >> "$CLIENT_PATH/client.ovpn"
 
