@@ -46,6 +46,9 @@ If you'd like to help support the future of the project, please consider:
 
 ## Resources
 
+### Real-time Chat
+[Slack](https://dockovpn.slack.com) ([registration](https://slack.k8s.io))
+
 ### Website
 
 <https://dockovpn.io>
