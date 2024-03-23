@@ -12,9 +12,9 @@ function createConfig() {
     # Redirect stderr to the black hole
 
     if [ -n "$PASSWORD_PROTECTED" ]; then
-        EASYRSA_BATCH=1 easyrsa build-client-full "$CLIENT_ID"
+        easyrsa --batch build-client-full "$CLIENT_ID"
     else
-        EASYRSA_BATCH=1 easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+        easyrsa --batch build-client-full "$CLIENT_ID" nopass &> /dev/null
     fi
 
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
@@ -80,7 +80,7 @@ function removeConfig() {
     easyrsa revoke $CLIENT_ID << EOF
 yes
 EOF
-    EASYRSA_CRL_DAYS=3650 easyrsa gen-crl
+    easyrsa --days=$CRL_DAYS gen-crl
 
     cp /opt/Dockovpn_data/pki/crl.pem /etc/openvpn
 
