@@ -11,10 +11,10 @@ function createConfig() {
 
     # Redirect stderr to the black hole
 
-    if [ "$PASSWORD_PROTECTED" -eq 1 ]; then
-        easyrsa build-client-full "$CLIENT_ID"
+    if [ -n "$PASSWORD_PROTECTED" ]; then
+        easyrsa --batch build-client-full "$CLIENT_ID"
     else
-        easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+        easyrsa --batch build-client-full "$CLIENT_ID" nopass &> /dev/null
     fi
 
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
@@ -80,7 +80,7 @@ function removeConfig() {
     easyrsa revoke $CLIENT_ID << EOF
 yes
 EOF
-    easyrsa gen-crl
+    easyrsa --days=$CRL_DAYS gen-crl
 
     cp /opt/Dockovpn_data/pki/crl.pem /etc/openvpn
 
@@ -121,7 +121,7 @@ function generateClientConfig() {
     if [ -d $CLIENT_PATH ]; then
         echo "$(datef) Client with this id [$CLIENT_ID] already exists"
         exit 1
-    else     
+    else
         createConfig
     fi
 
