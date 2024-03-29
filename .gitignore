@@ -9,5 +9,3 @@ test-reports/
 target
 .vscode/
 ipv6-leack-test.sh
-DockovpnMakefile
-mkd.sh
