@@ -32,14 +32,14 @@ To get more detailed information, go to [Quick Start](#-quick-start) tutorial or
 Dockovpn is a team of cybersecurity experts developing leading edge projects in Networking, VPN, DevOPS and SecOPS domains. Project is supported entirely by volonteers.
 If you'd like to help support the future of the project, please consider:
 - Giving developer time (see [Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md))!
-- Giving funds by becoming a sponsor on [GitHub](https://github.com/sponsors/dockovpn)!
+- Giving funds by becoming a sponsor on [GitHub](https://github.com/sponsors/dockovpn) or [OpenCollective](https://opencollective.com/dockovpn)!
 
 ## Content
 
 [Resources](#resources) \
 [Container properties](#container-properties) \
-[Video Quide](#📺-video-guide) \
-[Quick Start](#🚀-quick-start) \
+[Video Guide](#-video-guide) \
+[Quick Start](#-quick-start) \
 [Persisting configuration](#persisting-configuration) \
 [Alternative way. Run with docker-compose](#alternative-way-run-with-docker-compose) \
 [Other resources](#other-resources)
