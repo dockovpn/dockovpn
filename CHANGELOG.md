@@ -5,6 +5,7 @@
 - Add ./listconfigs.sh command
 - Add ./getconfig.sh command
 - Increased default CRL lifespan, parametrize CRL with env variable (by @scmanjarrez)
+- Fix issue with mounting new empty volume (by @itest6)
 - Update README docs (cudos to @scmanjarrez)
 
 ## v1.13.0
