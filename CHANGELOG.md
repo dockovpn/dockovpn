@@ -1,5 +1,13 @@
 # Change log
 
+## v1.14.0
+
+- Add ./listconfigs.sh command
+- Add ./getconfig.sh command
+- Increased default CRL lifespan, parametrize CRL with env variable (by @scmanjarrez)
+- Fix issue with mounting new empty volume (by @itest6)
+- Update README docs (cudos to @scmanjarrez)
+
 ## v1.13.0
 
 - Add --skip option to omit client generation on first launch
