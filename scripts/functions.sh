@@ -11,10 +11,10 @@ function createConfig() {
 
     # Redirect stderr to the black hole
 
-    if [ "$PASSWORD_PROTECTED" -eq 1 ]; then
-        easyrsa build-client-full "$CLIENT_ID"
+    if [ -n "$PASSWORD_PROTECTED" ]; then
+        easyrsa --batch build-client-full "$CLIENT_ID"
     else
-        easyrsa build-client-full "$CLIENT_ID" nopass &> /dev/null
+        easyrsa --batch build-client-full "$CLIENT_ID" nopass &> /dev/null
     fi
 
     # Writing new private key to '/usr/share/easy-rsa/pki/private/client.key
@@ -41,8 +41,6 @@ function createConfig() {
 
     # Append client id info to the config
     echo ";client-id $CLIENT_ID" >> "$CLIENT_PATH/client.ovpn"
-
-    echo $CLIENT_PATH
 }
 
 function zipFiles() {
@@ -81,7 +79,7 @@ function removeConfig() {
     easyrsa revoke $CLIENT_ID << EOF
 yes
 EOF
-    easyrsa gen-crl
+    easyrsa --days=$CRL_DAYS gen-crl
 
     cp /opt/Dockovpn_data/pki/crl.pem /etc/openvpn
 
@@ -98,10 +96,21 @@ function getVersionFull() {
     echo "$(datef) $(getVersion)"
 }
 
+function listConfigs() {
+    cd "$APP_PERSIST_DIR/clients"
+    ls -1
+}
+
+function getConfig() {
+    local CLIENT_ID="$1"
+
+    cat "$APP_PERSIST_DIR/clients/$CLIENT_ID/client.ovpn"
+}
+
 function generateClientConfig() {
     #case
     #first argument  = n  use second argument as CLIENT_ID
-    #first argument = np use second argument as CLIENT_ID and set PASSWORD_PROTECTED as 1
+    #first argument = np use second argument as CLIENT_ID and set PASSWORD_PROTECTED as yes
     #default generate random CLIENT_ID
     FLAGS=$1
     case $FLAGS in
@@ -110,7 +119,7 @@ function generateClientConfig() {
             ;;
         np)
             CLIENT_ID="$2"
-            PASSWORD_PROTECTED=1
+            PASSWORD_PROTECTED="yes"
             ;;
         *)
             CLIENT_ID="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
@@ -122,7 +131,7 @@ function generateClientConfig() {
     if [ -d $CLIENT_PATH ]; then
         echo "$(datef) Client with this id [$CLIENT_ID] already exists"
         exit 1
-    else     
+    else
         createConfig
     fi
 

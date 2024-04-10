@@ -72,10 +72,10 @@ cd "$APP_PERSIST_DIR"
 
 LOCKFILE=.gen
 
-# Regenerate certs only on the first start 
+# Regenerate certs only on the first start
 if [ ! -f $LOCKFILE ]; then
     IS_INITIAL="1"
-
+    test -d pki || REGENERATE="1"
     if [[ -n $REGENERATE ]]; then
         easyrsa --batch init-pki
         easyrsa --batch gen-dh
@@ -107,7 +107,7 @@ EOF3
 yes
 EOF4
 
-    easyrsa gen-crl
+    easyrsa --days=$CRL_DAYS gen-crl
 
     touch $LOCKFILE
 fi
