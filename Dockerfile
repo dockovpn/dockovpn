@@ -12,6 +12,7 @@ ENV NET_ADAPTER eth0
 ENV HOST_ADDR ""
 ENV HOST_TUN_PORT 1194
 ENV HOST_CONF_PORT 80
+ENV HOST_TUN_PROTOCOL udp
 ENV CRL_DAYS 3650
 
 WORKDIR ${APP_INSTALL_PATH}
@@ -34,7 +35,7 @@ RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init &
     cp config/server.conf /etc/openvpn/server.conf
 
 
-EXPOSE 1194/udp
+EXPOSE 1194/${HOST_TUN_PROTOCOL}
 EXPOSE 8080/tcp
 
 VOLUME [ "/opt/Dockovpn_data" ]

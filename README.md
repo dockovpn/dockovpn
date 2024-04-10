@@ -87,20 +87,23 @@ If you'd like to help support the future of the project, please consider:
 | NET_ADAPTER | Network adapter to use on the host machine | eth0 |
 | HOST_ADDR | Host address override if the resolved address doesn't work | localhost |
 | HOST_TUN_PORT | Tunnel port to advertise in the client config file | 1194 |
+| HOST_TUN_PROTOCOL | Tunnel protocol (`tcp` or `udp`) | udp |
 | HOST_CONF_PORT | HTTP port on the host machine to download the client config file | 80 |
 | CRL_DAYS | CRL days until expiration, i.e. invalid for revocation checking | 3650 |
 
 **⚠️ Note:** In the provided code snippet we advertise the configuration suitable for the most users. We don't recommend setting custom
 NET_ADAPTER and HOST_ADDR unless you absolutely have to. Now host address is resolved automatically when container starts..
-More often you'd like to customize HOST_TUN_PORT and HOST_CONF_PORT. If this is the case, use the snippet below (dont forget to replace `<custom port>` with your values):
+More often you'd like to customize HOST_TUN_PORT, HOST_CONF_PORT or HOST_TUN_PROTOCOL. If this is the case, use the snippet below (dont forget to replace `<custom port>` and `<custom protocol>`  with your values):
 
 ```shell
 DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
+DOCKOVPN_TUNNEL_PROTOCOL=<custom protocol>
 docker run -it --rm --cap-add=NET_ADMIN \
--p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
+-p $DOCKOVPN_TUNNEL_PORT:1194/$DOCKOVPN_TUNNEL_PROTOCOL -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
+-e HOST_TUN_PROTOCOL="$DOCKOVPN_TUNNEL_PROTOCOL" \
 --name dockovpn alekslitvinenk/openvpn
 ```
 

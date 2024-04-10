@@ -57,18 +57,21 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 | NET_ADAPTER | Сетевой адаптер для использования на серверной машине | eth0 |
 | HOST_ADDR | Переопределенный адрес сервера (если автоматически определенный не работает) | localhost |
 | HOST_TUN_PORT | Порт на сервере для передачи  VPN данных | 1194 |
+| HOST_TUN_PROTOCOL |                   Протокол туннеля (`tcp` или `udp`)                   |      udp      |
 | HOST_CONF_PORT | HTTP порт на сервере для скачивания клиентского файла конфигурации | 80 |
 
 **⚠️ Note:** В предоставленном фрагменте кода, мы используем конфигурацию, которая подойдет большинству пользователей. Мы не рекоммендуем менять NET_ADAPTER и HOST_ADDR на свои настройки если это абсолютно необходимо. Адрес хоста определяется автоматически.
-В отдельных случаях может потребоваться использовать порты отличные от тех, которые используются по умолчанию. Если это такой случай, используйте фрагмент кода ниже предварительно заменив `<custom port>` на нужные вам значения:
+В отдельных случаях может потребоваться использовать порты отличные от тех, которые используются по умолчанию. Если это такой случай, используйте фрагмент кода ниже предварительно заменив `<custom port>` или `<custom protocol>` на нужные вам значения:
 
 ```shell
 DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
+DOCKOVPN_TUNNEL_PROTOCOL=<custom protocol>
 docker run -it --rm --cap-add=NET_ADMIN \
--p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
+-p $DOCKOVPN_TUNNEL_PORT:1194/$DOCKOVPN_TUNNEL_PROTOCOL -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
+-e HOST_TUN_PROTOCOL="$DOCKOVPN_TUNNEL_PROTOCOL" \
 --name dockovpn alekslitvinenk/openvpn
 ```
 
