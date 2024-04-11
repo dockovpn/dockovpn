@@ -205,7 +205,7 @@ To run dockvpn with docker-compose run:
 
 ```bash
 docker-compose up -d && \
-docker-compose exec -d dockovpn wget -O /doc/Dockovpn/client.ovpn localhost:8080
+docker-compose exec -d dockovpn wget -O /opt/Dockovpn/client.ovpn localhost:8080
 ```
 
 After run this command you can find your `client.ovpn` inside `openvpn_conf` folder.
