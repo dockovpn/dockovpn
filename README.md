@@ -196,7 +196,8 @@ After run this command you can find your `client.ovpn` inside `openvpn_conf` fol
 
 ## Other resources
 
-[Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md)<br>
-[Code Of Conduct](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CODE_OF_CONDUCT.md)<br>
-[Release Guideline](https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/RELEASE_GUIDELINE.md)<br>
+[Privacy Policy](https://github.com/alekslitvinenk/docker-openvpn/blob/master/PRIVACY_POLICY.md) \
+[Contrubition Guidelines](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CONTRIBUTING.md) \
+[Code Of Conduct](https://github.com/alekslitvinenk/docker-openvpn/blob/master/CODE_OF_CONDUCT.md) \
+[Release Guideline](https://github.com/alekslitvinenk/docker-openvpn/blob/master/docs/RELEASE_GUIDELINE.md) \
 [License Agreement](https://github.com/alekslitvinenk/docker-openvpn/blob/master/LICENSE)
