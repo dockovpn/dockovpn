@@ -140,5 +140,6 @@ if ! [[ -n $NOOP ]]; then
 fi
 
 if ! [[ -n $QUIT ]]; then
-    tail -f /dev/null
+    # Sleep required to avoid race conditions
+    sleep 5 && tail -f /opt/Dockovpn/openvpn.log
 fi
