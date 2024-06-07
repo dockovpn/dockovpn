@@ -140,5 +140,5 @@ if ! [[ -n $NOOP ]]; then
 fi
 
 if ! [[ -n $QUIT ]]; then
-    tail -f /dev/null
+    tail -f /opt/Dockovpn/openvpn.log
 fi
