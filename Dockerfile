@@ -23,14 +23,14 @@ COPY config ./config
 COPY VERSION ./config
 
 # 设置官方包仓库地址，并逐步输出日志
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" > /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories && \
-    echo "Repositories updated successfully" || { cat /var/log/apk.log; exit 1; }
+# RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" > /etc/apk/repositories && \
+#    echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories && \
+#    echo "Repositories updated successfully" || { cat /var/log/apk.log; exit 1; }
 
 # 如果在中国大陆，使用国内镜像源
-# RUN echo "https://mirrors.aliyun.com/alpine/latest-stable/main" > /etc/apk/repositories && \
-#    echo "https://mirrors.aliyun.com/alpine/latest-stable/community" >> /etc/apk/repositories && \
-#    echo "Repositories updated successfully with Aliyun mirror" || { cat /var/log/apk.log; exit 1; }
+ RUN echo "https://mirrors.aliyun.com/alpine/latest-stable/main" > /etc/apk/repositories && \
+    echo "https://mirrors.aliyun.com/alpine/latest-stable/community" >> /etc/apk/repositories && \
+    echo "Repositories updated successfully with Aliyun mirror" || { cat /var/log/apk.log; exit 1; }
 
 # 安装所需的软件包，并设置 Easy-RSA 和 OpenVPN
 RUN apk update && \
