@@ -13,10 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
       - name: Check out the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up QEMU v
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
           platforms: arm/v7, arm64
