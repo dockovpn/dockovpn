@@ -1,6 +1,4 @@
-# 使用适合 ARM 架构的最新 Alpine 镜像
-# FROM arm32v7/alpine:latest
-FROM alpine:latest
+FROM alpine:3.14.1
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
@@ -23,26 +21,19 @@ COPY scripts .
 COPY config ./config
 COPY VERSION ./config
 
-# 设置官方包仓库地址，并逐步输出日志
- RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" > /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories && \
-    echo "Repositories updated successfully" || { cat /var/log/apk.log; exit 1; }
-
-# 如果在中国大陆，使用国内镜像源
-# RUN echo "https://mirrors.aliyun.com/alpine/latest-stable/main" > /etc/apk/repositories && \
-#    echo "https://mirrors.aliyun.com/alpine/latest-stable/community" >> /etc/apk/repositories && \
-#    echo "Repositories updated successfully with Aliyun mirror" || { cat /var/log/apk.log; exit 1; }
-
-# 安装所需的软件包，并设置 Easy-RSA 和 OpenVPN
-RUN apk update && \
-    apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init && \
+RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
     mkdir -p ${APP_PERSIST_DIR} && \
     cd ${APP_PERSIST_DIR} && \
     easyrsa init-pki && \
     easyrsa gen-dh && \
+    # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
+    # Copy DH file
     cp pki/dh.pem /etc/openvpn && \
-    cp ${APP_INSTALL_PATH}/config/server.conf /etc/openvpn/server.conf
+    # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
+    cd ${APP_INSTALL_PATH} && \
+    cp config/server.conf /etc/openvpn/server.conf
+
 
 EXPOSE 1194/${HOST_TUN_PROTOCOL}
 EXPOSE 8080/tcp
