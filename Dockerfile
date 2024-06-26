@@ -1,4 +1,4 @@
-# FROM alpine:3.14.1
+# 使用适合 ARM 架构的最新 Alpine 镜像
 FROM arm32v7/alpine:latest
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
@@ -22,22 +22,26 @@ COPY scripts .
 COPY config ./config
 COPY VERSION ./config
 
-# 使用官方镜像仓库地址
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.14/main" > /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
+# 设置官方包仓库地址，并逐步输出日志
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/main" > /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories && \
+    echo "Repositories updated successfully" || { cat /var/log/apk.log; exit 1; }
 
 # 如果在中国大陆，使用国内镜像源
-# RUN echo "https://mirrors.aliyun.com/alpine/v3.14/main/" > /etc/apk/repositories && \
-#    echo "https://mirrors.aliyun.com/alpine/v3.14/community/" >> /etc/apk/repositories
+# RUN echo "https://mirrors.aliyun.com/alpine/latest-stable/main" > /etc/apk/repositories && \
+#    echo "https://mirrors.aliyun.com/alpine/latest-stable/community" >> /etc/apk/repositories && \
+#    echo "Repositories updated successfully with Aliyun mirror" || { cat /var/log/apk.log; exit 1; }
 
 # 安装所需的软件包，并设置 Easy-RSA 和 OpenVPN
-RUN apk update
-RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init
-RUN ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa
-RUN mkdir -p ${APP_PERSIST_DIR}
-RUN cd ${APP_PERSIST_DIR} && easyrsa init-pki && easyrsa gen-dh
-RUN cp ${APP_PERSIST_DIR}/pki/dh.pem /etc/openvpn
-RUN cp ${APP_INSTALL_PATH}/config/server.conf /etc/openvpn/server.conf
+RUN apk update && \
+    apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init && \
+    ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
+    mkdir -p ${APP_PERSIST_DIR} && \
+    cd ${APP_PERSIST_DIR} && \
+    easyrsa init-pki && \
+    easyrsa gen-dh && \
+    cp pki/dh.pem /etc/openvpn && \
+    cp ${APP_INSTALL_PATH}/config/server.conf /etc/openvpn/server.conf
 
 EXPOSE 1194/${HOST_TUN_PROTOCOL}
 EXPOSE 8080/tcp
