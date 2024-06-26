@@ -26,18 +26,12 @@ COPY config ./config
 COPY VERSION ./config
 
 # 安装所需的软件包，并设置 Easy-RSA 和 OpenVPN
-RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init && \
-    ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
-    mkdir -p ${APP_PERSIST_DIR} && \
-    cd ${APP_PERSIST_DIR} && \
-    easyrsa init-pki && \
-    easyrsa gen-dh && \
-    # DH parameters of size 2048 created at /usr/share/easy-rsa/pki/dh.pem
-    # Copy DH file
-    cp pki/dh.pem /etc/openvpn && \
-    # Copy FROM ./scripts/server/conf TO /etc/openvpn/server.conf in DockerFile
-    cd ${APP_INSTALL_PATH} && \
-    cp config/server.conf /etc/openvpn/server.conf
+RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init
+RUN ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa
+RUN mkdir -p ${APP_PERSIST_DIR}
+RUN cd ${APP_PERSIST_DIR} && easyrsa init-pki && easyrsa gen-dh
+RUN cp ${APP_PERSIST_DIR}/pki/dh.pem /etc/openvpn
+RUN cp ${APP_INSTALL_PATH}/config/server.conf /etc/openvpn/server.conf
 
 
 EXPOSE 1194/${HOST_TUN_PROTOCOL}
