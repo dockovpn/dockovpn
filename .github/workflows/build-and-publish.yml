@@ -36,4 +36,4 @@ jobs:
           context: .
           platforms: linux/arm/v7, linux/arm64
           push: true
-          tags: your-dockerhub-username/dockovpn:latest
+          tags: freemanxyz/dockovpn:latest
