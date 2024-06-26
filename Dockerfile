@@ -1,6 +1,7 @@
 # FROM alpine:3.14.1
 # 使用适用于 ARM 架构的 Alpine 镜像
-FROM arm32v7/alpine:3.14.1
+# FROM arm32v7/alpine:3.14.1
+FROM arm32v7/alpine:latest
 
 LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
@@ -26,6 +27,7 @@ COPY config ./config
 COPY VERSION ./config
 
 # 安装所需的软件包，并设置 Easy-RSA 和 OpenVPN
+RUN apk update
 RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip curl dumb-init
 RUN ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa
 RUN mkdir -p ${APP_PERSIST_DIR}
