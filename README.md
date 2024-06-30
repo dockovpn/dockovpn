@@ -53,7 +53,7 @@ If you'd like to help support the future of the project, please consider:
 
 <https://dockovpn.io>
 
-### Socail media
+### Social media
 
 | Name | URL |
 | :--: | :-----: |
